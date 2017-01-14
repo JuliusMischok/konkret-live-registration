@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="studyflix">
+<html ng-app="registration">
 	<head>
 		<title>studyflix</title>
 		
@@ -18,8 +18,44 @@
 	  	<style> .ng-cloak { display: none !important; } </style>
 	</head>
 	<body>
-		<h1>Hello world</h1>
-
+		<div class="container">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a data-toggle="tab" href="#hints" translate="HEADLINE_HINTS_START"></a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#group" translate="HEADLINE_GROUP_INPUT"></a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#leader" translate="HEADLINE_LEADER_INPUT"></a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#participants" translate="HEADLINE_PARTICIPANTS_INPUT"></a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#confirm" translate="HEADLINE_CONFIRM"></a>
+				</li>
+			</ul>
+	
+			<div class="tab-content">
+				<div id="hints" class="tab-pane fade in active">
+					<ng-include src="'views/01_hints.html'" />
+				</div>
+				<div id="group" class="tab-pane fade">
+					<ng-include src="'views/02_group.html'" />
+				</div>
+				<div id="leader" class="tab-pane fade">
+					<ng-include src="'views/03_leader.html'" />
+				</div>
+				<div id="participants" class="tab-pane fade">
+					<ng-include src="'views/04_participants.html'" />
+				</div>
+				<div id="confirm" class="tab-pane fade">
+					<ng-include src="'views/05_confirm.html'" />
+				</div>
+			</div>
+		</div>
+	
 		<div id="sf-message-container" style="display: none;" ng-show="alerts.length > 0">
 			<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
 				<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
@@ -27,7 +63,7 @@
 			</div>
 		</div>
 	
-		<script src="scripts/konkretlive.registration.dade1d6c60d6455eaae3.js"></script>
+		<script src="scripts/konkretlive.registration.0f38018f840e03967d87.js"></script>
 		<script src="conf/constants.js"></script>
 	</body>
 </html>
