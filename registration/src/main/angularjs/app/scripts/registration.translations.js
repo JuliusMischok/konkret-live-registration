@@ -22,6 +22,7 @@ var app = angular.module('registration')
 			FORM_LABEL_EMAIL:						'E-Mail',
 			FORM_LABEL_PRICE:						'Preisgruppe',
 			FORM_LABEL_MEDICALHINTS:				'Medizinische Hinweise',
+			FORM_LABEL_BIRTHDAY:					'Geburtsdatum',
 			
 			FORM_CHECKBOX_VEGETARIAN:				'Vegetarier',
 			FORM_CHECKBOX_FOODALLERGY:				'Lebensmittelallergien',
@@ -40,12 +41,14 @@ var app = angular.module('registration')
 			FORM_PLACEHOLDER_LEADER_EMAIL:			'Deine E-Mailadresse...',
 			FORM_PLACEHOLDER_LEADER_PRICE:			'Deine Preisgruppe...',
 			FORM_PLACEHOLDER_LEADER_MEDICALHINTS:	'Hinweise zu Allergien, chronischen Erkrankungen und Medikamenten...',
+			FORM_PLACEHOLDER_LEADER_BIRTHDAY:		'Dein Geburtsdatum...',
 			
 			BUTTON_PROCEED:							'Weiter',
 			BUTTON_BACK:							'Zurück',
 			
 			MESSAGE_VALIDATION_REQUIRED:			'Eingabe von "{{field}}" ist verpflichtend',
 			MESSAGE_VALIDATION_TOO_LONG:			'Eingegebener Wert für "{{field}}" ist zu lang',
+			MESSAGE_VALIDATION_INVALID_DATE:		'{{field}} ist kein gültiges Datum',
 		});
 		
 		$translateProvider.preferredLanguage('de');

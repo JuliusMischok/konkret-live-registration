@@ -1,4 +1,4 @@
-<form name="leaderform" novalidate="novalidate">
+<form name="leaderform" novalidate="novalidate" ng-controller="LeaderInputController">
 	<div class="form-group" ng-class="{'has-error': leaderform.firstname.$invalid && leaderform.firstname.$touched}">
 		<label class="control-label" for="firstname" translate="FORM_LABEL_FIRSTNAME"></label>
 		<input class="form-control" type="text" name="firstname" ng-model="leader.firstname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_FIRSTNAME' | translate }}" required />
@@ -70,13 +70,26 @@
 		</div>
 	</div>
 	
-	TODO: Geburtsdatum
-	
+	<div class="form-group" ng-class="{'has-error': leaderform.birthday.$invalid && leaderform.birthday.$touched}">
+		<label class="control-label" for="birthday" translate="FORM_LABEL_BIRTHDAY"></label>
+		<p class="input-group">
+			<input class="form-control" type="text" name="birthday" ng-model="leader.birthday" ng-focus="openBirthdayPopup()" maxlength="10" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="birthdaypopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_BIRTHDAY' | translate }}" required />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="birthdaypopup.opened = !birthdaypopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+			</span>
+		</p>
+		<div ng-messages="leaderform.birthday.$error" class="kl-message-validation" ng-show="leaderform.birthday.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+		</div>
+	</div>
+		
 	<div class="form-group" ng-class="{'has-error': leaderform.price.$invalid && leaderform.price.$touched}">
 		<label class="control-label" for="price" translate="FORM_LABEL_PRICE"></label>
 		<select class="form-control" name="price" ng-model="leader.price" required>
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_LEADER_PRICE" />
-			<option>TODO</option>
+			<option ng-repeat="price in prices" value="{{ price.id }}">{{ price.title }}</option>
 		</select>
 		<div ng-messages="leaderform.price.$error" class="kl-message-validation" ng-show="leaderform.price.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_PRICE' | translate }}"></p>

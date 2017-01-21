@@ -1,4 +1,4 @@
-<form name="groupform" novalidate="novalidate">
+<form name="groupform" novalidate="novalidate" ng-controller="GroupInputController">
 	<div class="form-group" ng-class="{'has-error': groupform.church.$invalid && groupform.church.$touched}">
 		<label class="control-label" for="church" translate="FORM_LABEL_CHURCH"></label>
 		<input class="form-control" type="text" name="church" ng-model="group.church" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_CHURCH' | translate }}" required />
@@ -12,7 +12,7 @@
 		<label class="control-label" for="type" translate="FORM_LABEL_GROUPTYPE"></label>
 		<select class="form-control" name="type" ng-model="group.type" required>
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_GROUPTYPE" />
-			<option>TODO</option>
+			<option ng-repeat="grouptype in grouptypes" value="{{ grouptype.id }}">{{ grouptype.title }}</option>
 		</select>
 		<div ng-messages="groupform.type.$error" class="kl-message-validation" ng-show="groupform.type.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_GROUPTYPE' | translate }}"></p>
@@ -23,7 +23,7 @@
 		<label class="control-label" for="district" translate="FORM_LABEL_DISTRICT"></label>
 		<select class="form-control" name="district" ng-model="group.district" required>
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_DISTRICT" />
-			<option>TODO</option>
+			<option ng-repeat="district in districts" value="{{ district.id }}">{{ district.title }}</option>
 		</select>
 		<div ng-messages="groupform.district.$error" class="kl-message-validation" ng-show="groupform.district.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_DISTRICT' | translate }}"></p>

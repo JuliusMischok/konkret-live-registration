@@ -7,7 +7,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="/styles/konkretlive.registration.cd0f3d93dcbe0dc714b5.css">
+		<link rel="stylesheet" href="/styles/konkretlive.registration.8628d52c56e0892d5e6e.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,7 +17,7 @@
 	  	<![endif]-->
 	  	<style> .ng-cloak { display: none !important; } </style>
 	</head>
-	<body>
+	<body ng-controller="RegistrationController">
 		<div class="container">
 			<ul class="nav nav-tabs">
 				<li class="active">
@@ -54,6 +54,11 @@
 					<ng-include src="'views/05_confirm.html'" />
 				</div>
 			</div>
+			
+			<div>
+				<p>Group: {{group}}</p>
+				<p>Leader: {{leader}}</p>
+			</div>
 		</div>
 	
 		<div id="sf-message-container" style="display: none;" ng-show="alerts.length > 0">
@@ -63,7 +68,7 @@
 			</div>
 		</div>
 	
-		<script src="scripts/konkretlive.registration.77e41868b4bfa6c23de6.js"></script>
+		<script src="scripts/konkretlive.registration.4e10875b6f937ac00930.js"></script>
 		<script src="conf/constants.js"></script>
 	</body>
 </html>

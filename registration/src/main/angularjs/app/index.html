@@ -11,6 +11,7 @@
 			<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 			<link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
 			<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+			<link href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet" />
 			<link href="styles/registration.base.css" rel="stylesheet" />
 		<!-- endbuild -->
 
@@ -22,7 +23,7 @@
 	  	<![endif]-->
 	  	<style> .ng-cloak { display: none !important; } </style>
 	</head>
-	<body>
+	<body ng-controller="RegistrationController">
 		<div class="container">
 			<ul class="nav nav-tabs">
 				<li class="active">
@@ -58,6 +59,11 @@
 				<div id="confirm" class="tab-pane fade">
 					<ng-include src="'views/05_confirm.html'" />
 				</div>
+			</div>
+			
+			<div>
+				<p>Group: {{group}}</p>
+				<p>Leader: {{leader}}</p>
 			</div>
 		</div>
 	
