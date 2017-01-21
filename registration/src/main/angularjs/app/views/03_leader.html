@@ -1,2 +1,118 @@
-<h1 translate="HEADLINE_LEADER_INPUT"></h1>
-<p>TODO!</p>
+<form name="leaderform" novalidate="novalidate">
+	<div class="form-group" ng-class="{'has-error': leaderform.firstname.$invalid && leaderform.firstname.$touched}">
+		<label class="control-label" for="firstname" translate="FORM_LABEL_FIRSTNAME"></label>
+		<input class="form-control" type="text" name="firstname" ng-model="leader.firstname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_FIRSTNAME' | translate }}" required />
+		<div ng-messages="leaderform.firstname.$error" class="kl-message-validation" ng-show="leaderform.firstname.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.lastname.$invalid && leaderform.lastname.$touched}">
+		<label class="control-label" for="lastname" translate="FORM_LABEL_LASTNAME"></label>
+		<input class="form-control" type="text" name="lastname" ng-model="leader.lastname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_LASTNAME' | translate }}" required />
+		<div ng-messages="leaderform.lastname.$error" class="kl-message-validation" ng-show="leaderform.lastname.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.street.$invalid && leaderform.street.$touched}">
+		<label class="control-label" for="street" translate="FORM_LABEL_STREET"></label>
+		<input class="form-control" type="text" name="street" ng-model="leader.street" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_STREET' | translate }}" required />
+		<div ng-messages="leaderform.street.$error" class="kl-message-validation" ng-show="leaderform.street.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_STREET' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_STREET' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.zipcode.$invalid && leaderform.zipcode.$touched}">
+		<label class="control-label" for="zipcode" translate="FORM_LABEL_ZIPCODE"></label>
+		<input class="form-control" type="text" name="zipcode" ng-model="leader.zipcode" maxlength="5" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ZIPCODE' | translate }}" required />
+		<div ng-messages="leaderform.zipcode.$error" class="kl-message-validation" ng-show="leaderform.zipcode.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_ZIPCODE' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ZIPCODE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.city.$invalid && leaderform.city.$touched}">
+		<label class="control-label" for="city" translate="FORM_LABEL_CITY"></label>
+		<input class="form-control" type="text" name="city" ng-model="leader.city" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_CITY' | translate }}" required />
+		<div ng-messages="leaderform.city.$error" class="kl-message-validation" ng-show="leaderform.city.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_CITY' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_CITY' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.addressextra.$invalid && leaderform.addressextra.$touched}">
+		<label class="control-label" for="addressextra" translate="FORM_LABEL_ADDRESSEXTRA"></label>
+		<input class="form-control" type="text" name="addressextra" ng-model="leader.addressextra" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ADDRESSEXTRA' | translate }}" />
+		<div ng-messages="leaderform.addressextra.$error" class="kl-message-validation" ng-show="leaderform.addressextra.$touched">
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADDRESSEXTRA' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.mobile.$invalid && leaderform.mobile.$touched}">
+		<label class="control-label" for="mobile" translate="FORM_LABEL_MOBILE"></label>
+		<input class="form-control" type="text" name="mobile" ng-model="leader.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MOBILE' | translate }}" required />
+		<div ng-messages="leaderform.mobile.$error" class="kl-message-validation" ng-show="leaderform.mobile.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.email.$invalid && leaderform.email.$touched}">
+		<label class="control-label" for="email" translate="FORM_LABEL_EMAIL"></label>
+		<input class="form-control" type="text" name="email" ng-model="leader.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_EMAIL' | translate }}" required />
+		<div ng-messages="leaderform.email.$error" class="kl-message-validation" ng-show="leaderform.email.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+		</div>
+	</div>
+	
+	TODO: Geburtsdatum
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.price.$invalid && leaderform.price.$touched}">
+		<label class="control-label" for="price" translate="FORM_LABEL_PRICE"></label>
+		<select class="form-control" name="price" ng-model="leader.price" required>
+			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_LEADER_PRICE" />
+			<option>TODO</option>
+		</select>
+		<div ng-messages="leaderform.price.$error" class="kl-message-validation" ng-show="leaderform.price.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_PRICE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.vegetarian.$invalid && leaderform.vegetarian.$touched}">
+		<div class="checkbox">
+			<label><input type="checkbox" ng-model="leader.vegetarian">{{ 'FORM_CHECKBOX_VEGETARIAN' | translate }}</label>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.foodallergy.$invalid && leaderform.foodallergy.$touched}">
+		<div class="checkbox">
+			<label><input type="checkbox" ng-model="leader.foodallergy">{{ 'FORM_CHECKBOX_FOODALLERGY' | translate }}</label>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.medicalhints.$invalid && leaderform.medicalhints.$touched}">
+		<label class="control-label" for="medicalhints" translate="FORM_LABEL_MEDICALHINTS"></label>
+		<textarea class="form-control" name="medicalhints" ng-model="leader.medicalhints" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MEDICALHINTS' | translate }}"></textarea>
+		<div ng-messages="leaderform.medicalhints.$error" class="kl-message-validation" ng-show="leaderform.medicalhints.$touched">
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MEDICALHINTS' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': leaderform.counselling.$invalid && leaderform.counselling.$touched}">
+		<div class="checkbox">
+			<label><input type="checkbox" ng-model="leader.counselling">{{ 'FORM_CHECKBOX_COUNSELLING' | translate }}</label>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<button class="btn btn-default" translate="BUTTON_BACK"></button>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary" ng-disabled="!leaderform.$valid" translate="BUTTON_PROCEED"></button>
+	</div>
+</form>

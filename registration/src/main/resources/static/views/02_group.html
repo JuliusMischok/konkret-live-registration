@@ -2,7 +2,7 @@
 	<div class="form-group" ng-class="{'has-error': groupform.church.$invalid && groupform.church.$touched}">
 		<label class="control-label" for="church" translate="FORM_LABEL_CHURCH"></label>
 		<input class="form-control" type="text" name="church" ng-model="group.church" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_CHURCH' | translate }}" required />
-		<div ng-messages="groupform.church.$error" class="validationmessages" ng-show="groupform.church.$touched">
+		<div ng-messages="groupform.church.$error" class="kl-message-validation" ng-show="groupform.church.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_CHURCH' | translate }}"></p>
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_CHURCH' | translate }}"></p>
 		</div>
@@ -14,7 +14,7 @@
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_GROUPTYPE" />
 			<option>TODO</option>
 		</select>
-		<div ng-messages="groupform.type.$error" class="validationmessages" ng-show="groupform.type.$touched">
+		<div ng-messages="groupform.type.$error" class="kl-message-validation" ng-show="groupform.type.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_GROUPTYPE' | translate }}"></p>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_DISTRICT" />
 			<option>TODO</option>
 		</select>
-		<div ng-messages="groupform.district.$error" class="validationmessages" ng-show="groupform.district.$touched">
+		<div ng-messages="groupform.district.$error" class="kl-message-validation" ng-show="groupform.district.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_DISTRICT' | translate }}"></p>
 		</div>
 	</div>
