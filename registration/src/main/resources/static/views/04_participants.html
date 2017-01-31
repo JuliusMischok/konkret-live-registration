@@ -1,2 +1,147 @@
-<h1 translate="HEADLINE_PARTICIPANTS_INPUT"></h1>
-<p>TODO!</p>
+<div ng-controller="ParticipantInputController">
+	<div ng-show="showList">
+		<p ng-show="participants.length === 0" translate="MESSAGE_NO_PARTICIPANTS"></p>
+		<table class="table table-striped" ng-show="participants.length > 0">
+			<thead>
+				<tr>
+					<th translate="TABLE_HEADER_FIRSTNAME"></th>
+					<th translate="TABLE_HEADER_LASTNAME"></th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="participant in participants">
+					<td>{{participant.firstname}}</td>
+					<td>{{participant.lastname}}</td>
+					<td>
+						<a href="#" ng-click="editParticipant($index)" title="{{ 'TITLE_EDIT' | translate }}"><i class="fa fa-edit"></i></a>
+						<a href="#" ng-click="deleteParticipant($index)" title="{{ 'TITLE_DELETE' | translate }}"><i class="fa fa-trash"></i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-primary" ng-click="showAddParticipantForm()" translate="BUTTON_ADD_PARTICIPANT"></button>
+	</div>	
+	<form ng-show="!showList" name="participantform" novalidate="novalidate">
+		<div class="form-group" ng-class="{'has-error': participantform.firstname.$invalid && participantform.firstname.$touched}">
+			<label class="control-label" for="firstname" translate="FORM_LABEL_FIRSTNAME"></label>
+			<input class="form-control" type="text" name="firstname" ng-model="participant.firstname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_FIRSTNAME' | translate }}" required />
+			<div ng-messages="participantform.firstname.$error" class="kl-message-validation" ng-show="participantform.firstname.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.lastname.$invalid && participantform.lastname.$touched}">
+			<label class="control-label" for="lastname" translate="FORM_LABEL_LASTNAME"></label>
+			<input class="form-control" type="text" name="lastname" ng-model="participant.lastname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_LASTNAME' | translate }}" required />
+			<div ng-messages="participantform.lastname.$error" class="kl-message-validation" ng-show="participantform.lastname.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.mobile.$invalid && participantform.mobile.$touched}">
+			<label class="control-label" for="mobile">
+				{{ 'FORM_LABEL_MOBILE' | translate }}
+				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MOBILE' | translate }}">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
+			<input class="form-control" type="text" name="mobile" ng-model="participant.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_MOBILE' | translate }}" ng-required="mobileRequired()" />
+			<div ng-messages="participantform.mobile.$error" class="kl-message-validation" ng-show="participantform.mobile.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.email.$invalid && participantform.email.$touched}">
+			<label class="control-label" for="email">
+				{{ 'FORM_LABEL_EMAIL' | translate }}
+				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_EMAIL' | translate }}">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
+			<input class="form-control" type="text" name="email" ng-model="participant.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_EMAIL' | translate }}" required />
+			<div ng-messages="participantform.email.$error" class="kl-message-validation" ng-show="participantform.email.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.birthday.$invalid && participantform.birthday.$touched}">
+			<label class="control-label" for="birthday" translate="FORM_LABEL_BIRTHDAY"></label>
+			<p class="input-group">
+				<input class="form-control" type="text" name="birthday" ng-model="participant.birthday" ng-focus="openBirthdayPopup()" maxlength="10" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="birthdaypopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_BIRTHDAY' | translate }}" required />
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="birthdaypopup.opened = !birthdaypopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			</p>
+			<div ng-messages="participantform.birthday.$error" class="kl-message-validation" ng-show="participantform.birthday.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+				<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			</div>
+		</div>
+			
+		<div class="form-group" ng-class="{'has-error': participantform.price.$invalid && participantform.price.$touched}">
+			<label class="control-label" for="price">
+				{{ 'FORM_LABEL_PRICE' | translate }}
+				<a href="#" data-toggle="popover" data-trigger="focus" data-html="true" data-content="{{ 'HINT_PERSON_PRICE' | translate }}">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
+			<select class="form-control" name="price" ng-model="participant.price" required>
+				<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_PARTICIPANT_PRICE" />
+				<option ng-repeat="price in prices" value="{{ price.id }}">{{ price.title }}</option>
+			</select>
+			<div ng-messages="participantform.price.$error" class="kl-message-validation" ng-show="participantform.price.$touched">
+				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_PRICE' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.vegetarian.$invalid && participantform.vegetarian.$touched}">
+			<div class="checkbox">
+				<label><input type="checkbox" ng-model="participant.vegetarian">{{ 'FORM_CHECKBOX_VEGETARIAN' | translate }}</label>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.foodallergy.$invalid && participantform.foodallergy.$touched}">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" ng-model="participant.foodallergy">{{ 'FORM_CHECKBOX_FOODALLERGY' | translate }}
+					<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PARTICIPANT_FOODALLERGY' | translate }}">
+						<i class="fa fa-info-circle"></i>
+					</a>
+				</label>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="{'has-error': participantform.medicalhints.$invalid && participantform.medicalhints.$touched}">
+			<label class="control-label" for="medicalhints">
+					{{ 'FORM_LABEL_MEDICALHINTS' | translate }}
+					<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MEDICALHINTS' | translate }}">
+						<i class="fa fa-info-circle"></i>
+					</a>
+				</label>
+			<textarea class="form-control" name="medicalhints" ng-model="participant.medicalhints" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_MEDICALHINTS' | translate }}"></textarea>
+			<div ng-messages="participantform.medicalhints.$error" class="kl-message-validation" ng-show="participantform.medicalhints.$touched">
+				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MEDICALHINTS' | translate }}"></p>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-default" ng-click="backToList()" translate="BUTTON_CANCEL"></button>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" ng-click="saveParticipant()" ng-disabled="!participantform.$valid" translate="BUTTON_SAVE"></button>
+		</div>
+	</form>
+	
+	<div class="form-group">
+		<button class="btn btn-default" translate="BUTTON_BACK"></button>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary" translate="BUTTON_PROCEED"></button>
+	</div>
+</div>

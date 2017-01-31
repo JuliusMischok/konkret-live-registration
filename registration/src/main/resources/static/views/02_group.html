@@ -20,7 +20,12 @@
 	</div>
 
 	<div class="form-group" ng-class="{'has-error': groupform.district.$invalid && groupform.district.$touched}">
-		<label class="control-label" for="district" translate="FORM_LABEL_DISTRICT"></label>
+		<label class="control-label" for="district">
+			{{ 'FORM_LABEL_DISTRICT' | translate }}
+			<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_GROUP_DISTRICT' | translate }}">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
 		<select class="form-control" name="district" ng-model="group.district" required>
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_DISTRICT" />
 			<option ng-repeat="district in districts" value="{{ district.id }}">{{ district.title }}</option>

@@ -53,7 +53,12 @@
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': leaderform.mobile.$invalid && leaderform.mobile.$touched}">
-		<label class="control-label" for="mobile" translate="FORM_LABEL_MOBILE"></label>
+		<label class="control-label" for="mobile">
+			{{ 'FORM_LABEL_MOBILE' | translate }}
+			<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MOBILE' | translate }}">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
 		<input class="form-control" type="text" name="mobile" ng-model="leader.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MOBILE' | translate }}" required />
 		<div ng-messages="leaderform.mobile.$error" class="kl-message-validation" ng-show="leaderform.mobile.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
@@ -62,7 +67,12 @@
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': leaderform.email.$invalid && leaderform.email.$touched}">
-		<label class="control-label" for="email" translate="FORM_LABEL_EMAIL"></label>
+		<label class="control-label" for="email">
+			{{ 'FORM_LABEL_EMAIL' | translate }}
+			<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_EMAIL' | translate }}">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
 		<input class="form-control" type="text" name="email" ng-model="leader.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_EMAIL' | translate }}" required />
 		<div ng-messages="leaderform.email.$error" class="kl-message-validation" ng-show="leaderform.email.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
@@ -86,7 +96,12 @@
 	</div>
 		
 	<div class="form-group" ng-class="{'has-error': leaderform.price.$invalid && leaderform.price.$touched}">
-		<label class="control-label" for="price" translate="FORM_LABEL_PRICE"></label>
+		<label class="control-label" for="price">
+			{{ 'FORM_LABEL_PRICE' | translate }}
+			<a href="#" data-toggle="popover" data-trigger="focus" data-html="true" data-content="{{ 'HINT_PERSON_PRICE' | translate }}">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
 		<select class="form-control" name="price" ng-model="leader.price" required>
 			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_LEADER_PRICE" />
 			<option ng-repeat="price in prices" value="{{ price.id }}">{{ price.title }}</option>
@@ -104,12 +119,22 @@
 	
 	<div class="form-group" ng-class="{'has-error': leaderform.foodallergy.$invalid && leaderform.foodallergy.$touched}">
 		<div class="checkbox">
-			<label><input type="checkbox" ng-model="leader.foodallergy">{{ 'FORM_CHECKBOX_FOODALLERGY' | translate }}</label>
+			<label>
+				<input type="checkbox" ng-model="leader.foodallergy">{{ 'FORM_CHECKBOX_FOODALLERGY' | translate }}
+				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_LEADER_FOODALLERGY' | translate }}">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
 		</div>
 	</div>
 	
 	<div class="form-group" ng-class="{'has-error': leaderform.medicalhints.$invalid && leaderform.medicalhints.$touched}">
-		<label class="control-label" for="medicalhints" translate="FORM_LABEL_MEDICALHINTS"></label>
+		<label class="control-label" for="medicalhints">
+				{{ 'FORM_LABEL_MEDICALHINTS' | translate }}
+				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MEDICALHINTS' | translate }}">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
 		<textarea class="form-control" name="medicalhints" ng-model="leader.medicalhints" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MEDICALHINTS' | translate }}"></textarea>
 		<div ng-messages="leaderform.medicalhints.$error" class="kl-message-validation" ng-show="leaderform.medicalhints.$touched">
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MEDICALHINTS' | translate }}"></p>
