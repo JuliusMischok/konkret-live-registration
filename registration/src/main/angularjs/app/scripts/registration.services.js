@@ -32,10 +32,12 @@ var app = angular.module('registration')
 		};
 	})
 	.factory('priceService', function() {
+		// TODO: Datumsgrenze!!!!
+		
 		var prices = [
-			{id: 'price.nichtverdiener', title: 'Nichtverdiener'},
-			{id: 'price.geringverdiener', title: 'Geringverdiener'},
-			{id: 'price.vollverdiener', title: 'Vollverdiener'}
+			{id: 'price.nichtverdiener', title: 'Nichtverdiener', price: 99.00},
+			{id: 'price.geringverdiener', title: 'Geringverdiener', price: 109.00},
+			{id: 'price.vollverdiener', title: 'Vollverdiener', price: 119.00}
 		];
 		
 		return {

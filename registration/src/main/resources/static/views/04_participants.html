@@ -62,10 +62,11 @@
 					<i class="fa fa-info-circle"></i>
 				</a>
 			</label>
-			<input class="form-control" type="text" name="email" ng-model="participant.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_EMAIL' | translate }}" required />
+			<input class="form-control" type="email" name="email" ng-model="participant.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_EMAIL' | translate }}" required />
 			<div ng-messages="participantform.email.$error" class="kl-message-validation" ng-show="participantform.email.$touched">
 				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
 				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+				<p ng-message="email" translate="MESSAGE_VALIDATION_INVALID" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
 			</div>
 		</div>
 		
@@ -131,7 +132,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button class="btn btn-default" ng-click="backToList()" translate="BUTTON_CANCEL"></button>
+			<button class="btn btn-default" ng-click="cancelEdit()" translate="BUTTON_CANCEL"></button>
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary" ng-click="saveParticipant()" ng-disabled="!participantform.$valid" translate="BUTTON_SAVE"></button>

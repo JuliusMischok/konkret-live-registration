@@ -73,10 +73,11 @@
 				<i class="fa fa-info-circle"></i>
 			</a>
 		</label>
-		<input class="form-control" type="text" name="email" ng-model="leader.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_EMAIL' | translate }}" required />
+		<input class="form-control" type="email" name="email" ng-model="leader.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_EMAIL' | translate }}" required />
 		<div ng-messages="leaderform.email.$error" class="kl-message-validation" ng-show="leaderform.email.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+			<p ng-message="email" translate="MESSAGE_VALIDATION_INVALID" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
 		</div>
 	</div>
 	
