@@ -7,7 +7,6 @@
 				<tr>
 					<th translate="TABLE_HEADER_FIRSTNAME"></th>
 					<th translate="TABLE_HEADER_LASTNAME"></th>
-					<th translate="TABLE_HEADER_ADDRESS"></th>
 					<th translate="TABLE_HEADER_MOBILE"></th>
 					<th translate="TABLE_HEADER_EMAIL"></th>
 					<th translate="TABLE_HEADER_BIRTHDAY"></th>
@@ -20,13 +19,10 @@
 				<tr ng-repeat="person in getPersons()">
 					<td>{{person.firstname}}</td>
 					<td>{{person.lastname}}</td>
-					<td>
-						{{person.street}} <span ng-show="person.addressextra.length > 0"> ({{person.addressextra}})</span><br ng-show="person.street.length > 0"/> {{person.zipcode}} {{person.city}}
-					</td>
 					<td>{{person.mobile}}</td>
 					<td>{{person.email}}</td>
 					<td>{{person.birthday | date:'dd.MM.yyyy'}}</td>
-					<td>{{ getPrice(person) | currency:'€' }}</td>
+					<td>{{ getPrice(person) | number:2 }}&nbsp;&euro;</td>
 					<td>
 						<i ng-show="person.vegetarian" class="fa fa-check"></i>
 					</td>
@@ -37,7 +33,11 @@
 			</tbody>
 		</table>
 	</div>
-
+	
+	<h1 translate="HEADLINE_PRICE"></h1>
+	<p translate="TEXT_PRICE_BANK_TRANSFER" translate-value-wholeprice="{{ getWholeprice() | number:2 }}" translate-value-transferusage="{{ getTransferUsagePlaceholder() }}"></p>
+	
+	<h1 translate="HEADLINE_REGISTER"></h1>
 	<form name="confirmform">
 		<div class="form-group">
 			<div class="checkbox">
@@ -89,8 +89,6 @@
 	
 	<p>Persons: {{getPersons()}}</p>
 </div>
-
-TODO: Teilnehmerliste
 
 TODO: Preis
 

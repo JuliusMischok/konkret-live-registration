@@ -13,6 +13,15 @@ var app = angular.module('registration')
 		return {
 			grouptypes: function() {
 				return [].concat(grouptypes);
+			},
+			getGrouptype: function(id) {
+				var filteredGrouptypes = [].concat(grouptypes).filter(function(type) {return type.id === id;});
+				
+				if (filteredGrouptypes.length === 1) {
+					return filteredGrouptypes[0].title;
+				} else {
+					return 'n/a';
+				}
 			}
 		};
 	})
@@ -43,6 +52,15 @@ var app = angular.module('registration')
 		return {
 			prices: function() {
 				return [].concat(prices);
+			},
+			getPrice: function(id) {
+				var filteredPrices = [].concat(prices).filter(function(price) {return price.id === id;});
+				
+				if (filteredPrices.length === 1) {
+					return filteredPrices[0].price;
+				} else {
+					return undefined;
+				}
 			}
 		};
 	})

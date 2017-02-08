@@ -9,6 +9,8 @@ var app = angular.module('registration')
 			HEADLINE_PARTICIPANTS_INPUT:			'Teilnehmer',
 			HEADLINE_CONFIRM:						'Abschluss',
 			HEADLINE_REGISTERED_PERSONS:			'Eingetragene Personen',
+			HEADLINE_PRICE:							'Teilnehmerbeitrag',
+			HEADLINE_REGISTER:						'Verbindliche Anmeldung',
 			
 			FORM_LABEL_CHURCH:						'Gemeinde',
 			FORM_LABEL_GROUPTYPE:					'Gruppenart',
@@ -97,6 +99,7 @@ var app = angular.module('registration')
 			TEXT_HIDE_PRIVACY:						'Ausblenden',
 			TEXT_SHOW_SUPERVISION:					'Hinweise zur Aufsichtspflicht anzeigen',
 			TEXT_HIDE_SUPERVISION:					'Ausblenden',
+			TEXT_PRICE_BANK_TRANSFER:				'Bitte überweise den gesamten Teilnehmerbeitrag in Höhe von <strong>{{wholeprice}}&nbsp;&euro;</strong> auf das untenstehende Konto:<br/><br/><strong>IBAN:</strong>TODO<br/><strong>Verwendungszweck:</strong> Teilnehmerbeitrag {{transferusage}}',
 			
 		});
 		

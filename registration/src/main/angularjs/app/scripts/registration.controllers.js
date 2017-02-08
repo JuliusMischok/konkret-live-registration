@@ -125,7 +125,7 @@ var app = angular.module('registration')
 				$uibModalInstance.dismiss('cancel');
 			};
 	}])
-	.controller('ConfirmController', ['$scope', 'priceService', function($scope, priceService) {
+	.controller('ConfirmController', ['$scope', 'priceService', 'grouptypeService', '$translate', function($scope, priceService, grouptypeService, $translate) {
 		$scope.initPopovers();
 		$scope.hintPrivacyVisible = false;
 		$scope.hintSupervisionVisible = false;
@@ -133,13 +133,22 @@ var app = angular.module('registration')
 		$scope.supervisionConfirmed = false;
 				
 		$scope.getPrice = function(person) {
-			var filteredPrices = priceService.prices().filter(function(price) {console.log('comparing', price.id, person.price, typeof price.id, typeof person.price); return price.id === person.price;});
+			return priceService.getPrice(person.price);
+		};
+		
+		$scope.getWholeprice = function() {
+			var add = function(a, b) {return a + b;};
 			
-			if (filteredPrices.length === 1) {
-				return filteredPrices[0].price;
-			} else {
-				return undefined;
-			}
+			var sum = $scope.getPersons()
+					.map(function(person) {return $scope.getPrice(person);})
+					.reduce(add)
+					;
+			
+			return sum;
+		};
+		
+		$scope.getTransferUsagePlaceholder = function() {
+			return grouptypeService.getGrouptype($scope.group.type) + ' ' + $scope.group.church;
 		};
 		
 		$scope.getPersons = function() {
