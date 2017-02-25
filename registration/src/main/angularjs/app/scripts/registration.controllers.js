@@ -204,6 +204,12 @@ var app = angular.module('registration')
 		$scope.privacyConfirmed = false;
 		$scope.supervisionConfirmed = false;
 		
+		$scope.registration = {
+			group: $scope.group,
+			leader: $scope.leader,
+			participants: $scope.participants
+		};
+		
 		$scope.back = function() {
 			$scope.setActiveTab($scope.tabs.participants);
 		};

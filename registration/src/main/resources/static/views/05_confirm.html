@@ -83,5 +83,7 @@
 			<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
 			<button class="btn btn-primary" ng-disabled="!registrationPossible()" translate="BUTTON_REGISTER" ng-click="register()"></button>
 		</div>
+		
+		{{registration | json}}
 	</form>
 </div>
