@@ -80,17 +80,8 @@
 		</div>
 		 
 		<div class="form-group">
-			<button class="btn btn-default" translate="BUTTON_BACK"></button>
-		</div>
-		<div class="form-group">
-			<button class="btn btn-primary" ng-disabled="!registrationPossible()" translate="BUTTON_REGISTER"></button>
+			<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
+			<button class="btn btn-primary" ng-disabled="!registrationPossible()" translate="BUTTON_REGISTER" ng-click="register()"></button>
 		</div>
 	</form>
-	
-	<p>Persons: {{getPersons()}}</p>
 </div>
-
-TODO: Preis
-
-TODO: Kontoverbindung?
-

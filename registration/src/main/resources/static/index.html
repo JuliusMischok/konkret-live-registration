@@ -7,7 +7,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="/styles/konkretlive.registration.8628d52c56e0892d5e6e.css">
+		<link rel="stylesheet" href="/styles/konkretlive.registration.b49272c4363486fc07db.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,47 +19,23 @@
 	</head>
 	<body ng-controller="RegistrationController">
 		<div class="container">
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a data-toggle="tab" href="#hints" translate="HEADLINE_HINTS_START"></a>
-				</li>
-				<li>
-					<a data-toggle="tab" href="#group" translate="HEADLINE_GROUP_INPUT"></a>
-				</li>
-				<li>
-					<a data-toggle="tab" href="#leader" translate="HEADLINE_LEADER_INPUT"></a>
-				</li>
-				<li>
-					<a data-toggle="tab" href="#participants" translate="HEADLINE_PARTICIPANTS_INPUT"></a>
-				</li>
-				<li>
-					<a data-toggle="tab" href="#confirm" translate="HEADLINE_CONFIRM"></a>
-				</li>
-			</ul>
-	
-			<div class="tab-content">
-				<div id="hints" class="tab-pane fade in active">
+			<uib-tabset active="activeTab">
+				<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
 					<ng-include src="'views/01_hints.html'" />
-				</div>
-				<div id="group" class="tab-pane fade">
+				</uib-tab>
+				<uib-tab index="tabs.group" heading="{{ 'HEADLINE_GROUP_INPUT' | translate }}">
 					<ng-include src="'views/02_group.html'" />
-				</div>
-				<div id="leader" class="tab-pane fade">
+				</uib-tab>
+				<uib-tab index="tabs.leader" heading="{{ 'HEADLINE_LEADER_INPUT' | translate }}" disable="!groupReady()">
 					<ng-include src="'views/03_leader.html'" />
-				</div>
-				<div id="participants" class="tab-pane fade">
+				</uib-tab>
+				<uib-tab index="tabs.participants" heading="{{ 'HEADLINE_PARTICIPANTS_INPUT' | translate }}" disable="!leaderReady()">
 					<ng-include src="'views/04_participants.html'" />
-				</div>
-				<div id="confirm" class="tab-pane fade">
+				</uib-tab>
+				<uib-tab index="tabs.confirm" heading="{{ 'HEADLINE_CONFIRM' | translate }}" disable="!participantsReady()">
 					<ng-include src="'views/05_confirm.html'" />
-				</div>
-			</div>
-			
-			<div>
-				<p>Group: {{group}}</p>
-				<p>Leader: {{leader}}</p>
-				<p>Participants {{participants}}
-			</div>
+				</uib-tab>
+			</uib-tabset>
 		</div>
 	
 		<div id="sf-message-container" style="display: none;" ng-show="alerts.length > 0">
@@ -69,7 +45,7 @@
 			</div>
 		</div>
 	
-		<script src="scripts/konkretlive.registration.7b863a5629d9cf32c22c.js"></script>
+		<script src="scripts/konkretlive.registration.14649882368c86aad01a.js"></script>
 		<script src="conf/constants.js"></script>
 	</body>
 </html>

@@ -1,3 +1,5 @@
+<h1 translate="HEADLINE_LEADER_DATA"></h1>
+
 <form name="leaderform" novalidate="novalidate" ng-controller="LeaderInputController">
 	<div class="form-group" ng-class="{'has-error': leaderform.firstname.$invalid && leaderform.firstname.$touched}">
 		<label class="control-label" for="firstname" translate="FORM_LABEL_FIRSTNAME"></label>
@@ -55,7 +57,7 @@
 	<div class="form-group" ng-class="{'has-error': leaderform.mobile.$invalid && leaderform.mobile.$touched}">
 		<label class="control-label" for="mobile">
 			{{ 'FORM_LABEL_MOBILE' | translate }}
-			<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MOBILE' | translate }}">
+			<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_LEADER_MOBILE' | translate }}">
 				<i class="fa fa-info-circle"></i>
 			</a>
 		</label>
@@ -84,7 +86,7 @@
 	<div class="form-group" ng-class="{'has-error': leaderform.birthday.$invalid && leaderform.birthday.$touched}">
 		<label class="control-label" for="birthday" translate="FORM_LABEL_BIRTHDAY"></label>
 		<p class="input-group">
-			<input class="form-control" type="text" name="birthday" ng-model="leader.birthday" ng-focus="openBirthdayPopup()" maxlength="10" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="birthdaypopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_BIRTHDAY' | translate }}" required />
+			<input class="form-control" type="text" name="birthday" ng-model="leader.birthday" ng-focus="openBirthdayPopup()" maxlength="10" ng-blur="validateBirthday()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="birthdaypopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_BIRTHDAY' | translate }}" required />
 			<span class="input-group-btn">
 				<button type="button" class="btn btn-default" ng-click="birthdaypopup.opened = !birthdaypopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
 			</span>
@@ -93,6 +95,7 @@
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
 			<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			<p ng-message="max" translate="MESSAGE_VALIDATION_LEADER_FULLAGE"></p>
 		</div>
 	</div>
 		
@@ -149,9 +152,7 @@
 	</div>
 	
 	<div class="form-group">
-		<button class="btn btn-default" translate="BUTTON_BACK"></button>
-	</div>
-	<div class="form-group">
-		<button class="btn btn-primary" ng-disabled="!leaderform.$valid" translate="BUTTON_PROCEED"></button>
+		<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
+		<button class="btn btn-primary" ng-disabled="!leaderform.$valid" translate="BUTTON_PROCEED" ng-click="proceed()"></button>
 	</div>
 </form>

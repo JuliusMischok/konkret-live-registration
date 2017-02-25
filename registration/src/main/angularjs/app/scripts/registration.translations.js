@@ -4,9 +4,13 @@ var app = angular.module('registration')
 	.config(['$translateProvider', function($translateProvider) {
 		$translateProvider.translations('de', {
 			HEADLINE_HINTS_START:					'Start',
+			HEADLINE_WELCOME:						'Herzlich Willkommen!',
 			HEADLINE_GROUP_INPUT:					'Gruppe',
+			HEADLINE_GROUP_DATA:					'Gruppendaten',
 			HEADLINE_LEADER_INPUT:					'Leiter',
+			HEADLINE_LEADER_DATA:					'Daten des Gruppenleiters',
 			HEADLINE_PARTICIPANTS_INPUT:			'Teilnehmer',
+			HEADLINE_PARTICIPANTS_DATA:				'Teilnehmer',
 			HEADLINE_CONFIRM:						'Abschluss',
 			HEADLINE_REGISTERED_PERSONS:			'Eingetragene Personen',
 			HEADLINE_PRICE:							'Teilnehmerbeitrag',
@@ -68,10 +72,12 @@ var app = angular.module('registration')
 			MESSAGE_VALIDATION_INVALID:				'Eingegebener Wert für "{{field}}" ist ungültig',
 			MESSAGE_VALIDATION_TOO_LONG:			'Eingegebener Wert für "{{field}}" ist zu lang',
 			MESSAGE_VALIDATION_INVALID_DATE:		'{{field}} ist kein gültiges Datum',
-			MESSAGE_NO_PARTICIPANTS:					'Keine Teilnehmer eingegeben',
+			MESSAGE_NO_PARTICIPANTS:				'Keine Teilnehmer eingegeben',
+			MESSAGE_VALIDATION_LEADER_FULLAGE:		'Gruppenleiter muss zu Festivalbeginn volljähring sein',
 			
 			HINT_GROUP_DISTRICT:					'Diese Eingabe nutzen wir zur Berechnung unserer Zuschüsse.',
-			HINT_PERSON_MOBILE:						'Diese Handynummer dient uns im Bedarfsfall zur Kontaktaufnahme auf dem Festivalgelände. Die Handynumer wird während des Festivalzeitraums ggf. für den Versand von SMS genutzt.',
+			HINT_LEADER_MOBILE:						'Diese Handynummer dient uns im Bedarfsfall zur Kontaktaufnahme auf dem Festivalgelände. Die Handynumer wird während des Festivalzeitraums ggf. für den Versand von SMS genutzt.',
+			HINT_PARTICIPANT_MOBILE:				'Diese Handynummer nutzen wir im Vorfeld zur Abklärung der Lebensmittelallergien. Die Handynumer wird während des Festivalzeitraums ggf. für den Versand von SMS genutzt.',
 			HINT_PERSON_EMAIL:						'Diese E-Mail Adresse dient uns zur Kontaktaufnahme im Vorfeld des Festivals.',
 			HINT_PERSON_PRICE:						'Bitte sei bei der Eingabe der Preisgruppe ehrlich, der Teilnehmerbeitrag ist so günstig wie möglich kalkuliert!<br/><strong>Nichtverdiener:</strong> Schüler, Studenten, Hausfrauen, ...<br/><strong>Geringverdiener:</strong> Auszubildende, Bufdis, Arbeitslose, ...<br/><strong>Vollverdiener:</strong> Alle anderen...',
 			HINT_LEADER_FOODALLERGY:				'Wenn du dieses Feld aktivierst, setzen wir uns mit dir in Verbindung, um deine Lebensmittelallergien abzuklären.',
@@ -100,6 +106,7 @@ var app = angular.module('registration')
 			TEXT_SHOW_SUPERVISION:					'Hinweise zur Aufsichtspflicht anzeigen',
 			TEXT_HIDE_SUPERVISION:					'Ausblenden',
 			TEXT_PRICE_BANK_TRANSFER:				'Bitte überweise den gesamten Teilnehmerbeitrag in Höhe von <strong>{{wholeprice}}&nbsp;&euro;</strong> auf das untenstehende Konto:<br/><br/><strong>IBAN:</strong>TODO<br/><strong>Verwendungszweck:</strong> Teilnehmerbeitrag {{transferusage}}',
+			TEXT_START:								'Schön, dass du mit deiner Gruppe bei konkret live dabei sein willst!<br/>Bitte beachte die folgenden Hinweise:<ul><li>Die Anmeldung ist nur als komplette Gruppe möglich.</li><li>Jede Gruppe benötigt einen volljährigen Gruppenleiter.</li><li>Änderung von Daten, Ab- oder Nachmeldungen sind nur über <a href="mailto:office@konkretlive.de">office@konkretlive.de</a> möglich.</li></ul>',
 			
 		});
 		

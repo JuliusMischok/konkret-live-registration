@@ -1,4 +1,11 @@
 <div ng-controller="ParticipantInputController">
+	<h1>
+		<span translate="HEADLINE_PARTICIPANTS_DATA"></span>
+		<a class="anchor-link" ng-click="showAddParticipantForm()" ng-show="showList">
+			<i class="fa fa-plus-circle"></i>
+		</a>	
+	</h1>
+	
 	<div ng-show="showList">
 		<p ng-show="participants.length === 0" translate="MESSAGE_NO_PARTICIPANTS"></p>
 		<table class="table table-striped" ng-show="participants.length > 0">
@@ -20,7 +27,11 @@
 				</tr>
 			</tbody>
 		</table>
-		<button class="btn btn-primary" ng-click="showAddParticipantForm()" translate="BUTTON_ADD_PARTICIPANT"></button>
+		
+		<div class="form-group">
+			<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
+			<button class="btn btn-primary" translate="BUTTON_PROCEED" ng-click="proceed()" ng-disabled="participants.length === 0"></button>
+		</div>
 	</div>	
 	<form ng-show="!showList" name="participantform" novalidate="novalidate">
 		<div class="form-group" ng-class="{'has-error': participantform.firstname.$invalid && participantform.firstname.$touched}">
@@ -41,15 +52,15 @@
 			</div>
 		</div>
 		
-		<div class="form-group" ng-class="{'has-error': participantform.mobile.$invalid && participantform.mobile.$touched}">
+		<div class="form-group" ng-class="{'has-error': participantform.mobile.$invalid}">
 			<label class="control-label" for="mobile">
 				{{ 'FORM_LABEL_MOBILE' | translate }}
-				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PERSON_MOBILE' | translate }}">
+				<a href="#" data-toggle="popover" data-trigger="focus" data-content="{{ 'HINT_PARTICIPANT_MOBILE' | translate }}">
 					<i class="fa fa-info-circle"></i>
 				</a>
 			</label>
-			<input class="form-control" type="text" name="mobile" ng-model="participant.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_MOBILE' | translate }}" ng-required="mobileRequired()" />
-			<div ng-messages="participantform.mobile.$error" class="kl-message-validation" ng-show="participantform.mobile.$touched">
+			<input class="form-control" type="text" name="mobile" ng-model="participant.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_PARTICIPANT_MOBILE' | translate }}" ng-required="participant.foodallergy" />
+			<div ng-messages="participantform.mobile.$error" class="kl-message-validation">
 				<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
 				<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
 			</div>
@@ -133,16 +144,10 @@
 		
 		<div class="form-group">
 			<button class="btn btn-default" ng-click="cancelEdit()" translate="BUTTON_CANCEL"></button>
-		</div>
-		<div class="form-group">
 			<button class="btn btn-primary" ng-click="saveParticipant()" ng-disabled="!participantform.$valid" translate="BUTTON_SAVE"></button>
 		</div>
+		<div class="form-group">
+			
+		</div>
 	</form>
-	
-	<div class="form-group">
-		<button class="btn btn-default" translate="BUTTON_BACK"></button>
-	</div>
-	<div class="form-group">
-		<button class="btn btn-primary" translate="BUTTON_PROCEED"></button>
-	</div>
 </div>
