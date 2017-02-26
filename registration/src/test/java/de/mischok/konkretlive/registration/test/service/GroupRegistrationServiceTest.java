@@ -51,8 +51,10 @@ public class GroupRegistrationServiceTest {
 		RestAssured.given()
 			.auth().basic("dev", "dev")
 		.when()
+			.log().all()
 			.get(location)
 		.then()
+			.log().all()
 			.statusCode(HttpStatus.OK.value())
 			.body("group.church", Matchers.equalTo("FeG Augsburg-Mitte"))
 			.body("group.type", Matchers.equalTo("grouptype.jugendkreis"))
@@ -64,17 +66,48 @@ public class GroupRegistrationServiceTest {
 			.body("leader.city", Matchers.equalTo("Augsburg"))
 			.body("leader.mobile", Matchers.equalTo("01704109941"))
 			.body("leader.email", Matchers.equalTo("julius.mischok@mischok-it.de"))
-			.body("leader.birthday", Matchers.equalTo("1986-02-17T23:00:00.000Z"))
+			.body("leader.birthday", Matchers.equalTo("1986-02-17T23:00:00Z"))
 			.body("leader.price", Matchers.equalTo("price.vollverdiener"))
 			.body("leader.vegetarian", Matchers.equalTo(true))
 			.body("participants.size()", Matchers.equalTo(1))
-			.body("participants.firstname", Matchers.equalTo("Lenja"))
-			.body("participants.lastname", Matchers.equalTo("Mischok"))
-			.body("participants.mobile", Matchers.equalTo("0170/9350225"))
-			.body("participants.email", Matchers.equalTo("lenja@mischok-it.de"))
-			.body("participants.birthday", Matchers.equalTo("2016-10-22T22:00:00.000Z"))
-			.body("participants.price", Matchers.equalTo("price.nichtverdiener"))
-			.body("participants.medicalhints", Matchers.equalTo("Baby"))
+			.body("participants.firstname", Matchers.hasItem("Lenja"))
+			.body("participants.lastname", Matchers.hasItem("Mischok"))
+			.body("participants.mobile", Matchers.hasItem("0170/9350225"))
+			.body("participants.email", Matchers.hasItem("lenja@mischok-it.de"))
+			.body("participants.birthday", Matchers.hasItem("2016-10-22T22:00:00Z"))
+			.body("participants.price", Matchers.hasItem("price.nichtverdiener"))
+			.body("participants.medicalhints", Matchers.hasItem("Baby"))
+			;
+	}
+	
+	@Test
+	public void testValidation() {
+		String json = "{ \"group\": { \"church\": \"FeG Augsburg-Mitte\", \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1986-06-01T23:59:59.999Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"medicalhints\": \"Baby\" } ] }";
+		
+		RestAssured.given()
+			.contentType(ContentType.JSON)
+			.body(json)
+		.when()
+			.post("registration")
+		.then()
+			.log().all()
+			.statusCode(HttpStatus.BAD_REQUEST.value())
+			.body("field", Matchers.hasItem("participants[0].mobile"))
+			.body("code", Matchers.hasItem("required"))
+			;
+		
+		json = "{ \"group\": { \"church\": \"FeG Augsburg-Mitte\", \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1999-06-01T23:59:59.999Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"medicalhints\": \"Baby\", \"mobile\": \"habkeins\" } ] }";
+		
+		RestAssured.given()
+			.contentType(ContentType.JSON)
+			.body(json)
+		.when()
+			.post("registration")
+		.then()
+			.log().all()
+			.statusCode(HttpStatus.BAD_REQUEST.value())
+			.body("field", Matchers.hasItem("leader.birthday"))
+			.body("code", Matchers.hasItem("fullage"))
 			;
 	}
 }

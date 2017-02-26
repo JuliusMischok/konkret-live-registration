@@ -1,9 +1,11 @@
-package de.mischok.konkretlive.registration.service.dtos;
+package de.mischok.konkretlive.registration.model;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Leader extends Person {
-
+	
 	@NotBlank
 	private String street;
 

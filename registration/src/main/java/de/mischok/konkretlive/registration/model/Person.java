@@ -1,12 +1,19 @@
-package de.mischok.konkretlive.registration.service.dtos;
+package de.mischok.konkretlive.registration.model;
 
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
+@Document
 public class Person {
+	
+	@Id
+	private String id;
 	
 	@NotBlank
 	private String firstname;
@@ -18,6 +25,7 @@ public class Person {
 	private String email;
 	
 	@NotNull
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date birthday;
 
 	@NotBlank
@@ -158,5 +166,12 @@ public class Person {
 	 */
 	public void setMedicalhints(String medicalhints) {
 		this.medicalhints = medicalhints;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
 	}
 }

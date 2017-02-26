@@ -1,11 +1,27 @@
-package de.mischok.konkretlive.registration.service.dtos;
+package de.mischok.konkretlive.registration.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Registration {
+	
+	@Id
+	private String id;
+	
+	@DBRef
 	private Group group;
+	
+	@DBRef
 	private Leader leader;
+	
+	@DBRef
 	private List<Person> participants;
+	
+	public Registration() {}
 	
 	/**
 	 * @return the group
@@ -47,5 +63,12 @@ public class Registration {
 	 */
 	public void setParticipants(List<Person> participants) {
 		this.participants = participants;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
 	}
 }

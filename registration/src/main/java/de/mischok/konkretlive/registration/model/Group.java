@@ -1,8 +1,14 @@
-package de.mischok.konkretlive.registration.service.dtos;
+package de.mischok.konkretlive.registration.model;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Group {
+	
+	@Id
+	private String id;
 	
 	@NotBlank
 	private String church;
@@ -55,5 +61,12 @@ public class Group {
 	 */
 	public void setDistrict(String district) {
 		this.district = district;
-	};
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
 }
