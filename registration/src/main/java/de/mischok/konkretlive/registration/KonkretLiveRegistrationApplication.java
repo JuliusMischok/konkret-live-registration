@@ -56,7 +56,7 @@ public class KonkretLiveRegistrationApplication extends WebSecurityConfigurerAda
 		.httpBasic()
 		.and()
 		.authorizeRequests()
-			.antMatchers(HttpMethod.GET, "**").authenticated()
+			.antMatchers(HttpMethod.GET, "/registration/**").authenticated()
 		.and()
 		.csrf().disable();
     }

@@ -105,7 +105,7 @@ var app = angular.module('registration')
 			TEXT_HIDE_PRIVACY:						'Ausblenden',
 			TEXT_SHOW_SUPERVISION:					'Hinweise zur Aufsichtspflicht anzeigen',
 			TEXT_HIDE_SUPERVISION:					'Ausblenden',
-			TEXT_PRICE_BANK_TRANSFER:				'Bitte überweise den gesamten Teilnehmerbeitrag in Höhe von <strong>{{wholeprice}}&nbsp;&euro;</strong> auf das untenstehende Konto:<br/><br/><strong>IBAN:</strong>TODO<br/><strong>Verwendungszweck:</strong> Teilnehmerbeitrag {{transferusage}}',
+			TEXT_PRICE_BANK_TRANSFER:				'Bitte überweise den gesamten Teilnehmerbeitrag in Höhe von <strong>{{wholeprice}}&nbsp;&euro;</strong> auf das untenstehende Konto:<br/><br/><strong>IBAN:</strong> DE42 4526 0475 0015 3744 00<br/><strong>BIC:</strong> GENODEM1BFG<br/><strong>Bank:</strong> SKB Witten<br/><strong>Kontoinhaber:</strong> FeG Würzburg - Zeltlagerarbeit-<br/><strong>Verwendungszweck:</strong> Teilnehmerbeitrag {{transferusage}}',
 			TEXT_START:								'Schön, dass du mit deiner Gruppe bei konkret live dabei sein willst!<br/>Bitte beachte die folgenden Hinweise:<ul><li>Die Anmeldung ist nur als komplette Gruppe möglich.</li><li>Jede Gruppe benötigt einen volljährigen Gruppenleiter.</li><li>Änderung von Daten, Ab- oder Nachmeldungen sind nur über <a href="mailto:office@konkretlive.de">office@konkretlive.de</a> möglich.</li></ul>',
 			
 		});

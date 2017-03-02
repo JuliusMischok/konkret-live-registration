@@ -47,6 +47,7 @@ public class EmailService {
 				MimeMessageHelper helper = new MimeMessageHelper(message, true);
 				
 				helper.setTo(recipient);
+				helper.setSubject(subject);
 				helper.setFrom(new InternetAddress("office@konkretlive.de", "konkret live Office"));
 				helper.setText(htmlBody, true);
 				helper.addAttachment(attachmentName, attachmentStream, "application/vnd.ms-excel");
