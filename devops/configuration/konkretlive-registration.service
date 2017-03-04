@@ -1,0 +1,14 @@
+[Unit]
+Description=Registration service for konkretlive festival
+
+[Service]
+Environment="STARTPARAMETERS=--server.port=8099 --serviceuser.name=konkretlive-admin --serviceuser.password=<<REPLACE>> --registration.backendServiceUrl=http://anmeldung.konkretlive.de --mail.sendenabled=true --mail.office=jm@mischok-it.de"
+Environment="SERVICENAME=konkretlive-registration"
+Environment="PATHTOJAR=/var/konkretlive/"
+Environment="LOGPATH=/var/log/konkretlive/${SERVICENAME}.log"
+Environment="ERRORPATH=/var/log/konkretlive/${SERVICENAME}.err"
+ExecStart=/bin/sh -c 'java -jar ${PATHTOJAR}${SERVICENAME}.jar ${STARTPARAMETERS} >> ${LOGPATH} 2>>${ERRORPATH}'
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
