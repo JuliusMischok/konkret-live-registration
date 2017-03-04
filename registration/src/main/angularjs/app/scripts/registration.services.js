@@ -47,12 +47,17 @@ var app = angular.module('registration')
 		};
 	})
 	.factory('priceService', function() {
-		// TODO: Datumsgrenze!!!!
+		var priceChange = new Date(2017, 3, 17, 0, 0, 0);
+		var now = Date.now();
 		
-		var prices = [
-			{id: 'price.nichtverdiener', title: 'Nichtverdiener', price: 99.00},
-			{id: 'price.geringverdiener', title: 'Geringverdiener', price: 109.00},
-			{id: 'price.vollverdiener', title: 'Vollverdiener', price: 119.00}
+		var prices = (now < priceChange) ? [
+			{id: 'price.nichtverdiener', title: 'Nichtverdiener', price: 89.00},
+			{id: 'price.geringverdiener', title: 'Geringverdiener', price: 89.00},
+			{id: 'price.vollverdiener', title: 'Vollverdiener', price: 109.00}
+		] : [
+			{id: 'price.nichtverdiener.spaet', title: 'Nichtverdiener', price: 99.00},
+			{id: 'price.geringverdiener.spaet', title: 'Geringverdiener', price: 109.00},
+			{id: 'price.vollverdiener.spaet', title: 'Vollverdiener', price: 119.00}
 		];
 		
 		return {
