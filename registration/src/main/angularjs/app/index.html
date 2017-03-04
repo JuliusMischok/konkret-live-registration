@@ -7,6 +7,9 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+
 		<!-- build:css /styles/konkretlive.registration.css -->
 			<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 			<link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
@@ -21,36 +24,58 @@
 	    	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	    	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	  	<![endif]-->
+	  	
+	  	<link rel='stylesheet' id='illdy-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900,700,300,300italic|Raleway:400,900|Roboto:300,400' type='text/css' media='all' />
 	  	<style> .ng-cloak { display: none !important; } </style>
 	</head>
 	<body ng-controller="RegistrationController">
-		<div class="container" ng-show="!registrationPerformed">
-			<uib-tabset active="activeTab">
-				<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
-					<ng-include src="'views/01_hints.html'" />
-				</uib-tab>
-				<uib-tab index="tabs.group" heading="{{ 'HEADLINE_GROUP_INPUT' | translate }}">
-					<ng-include src="'views/02_group.html'" />
-				</uib-tab>
-				<uib-tab index="tabs.leader" heading="{{ 'HEADLINE_LEADER_INPUT' | translate }}" disable="!groupReady()">
-					<ng-include src="'views/03_leader.html'" />
-				</uib-tab>
-				<uib-tab index="tabs.participants" heading="{{ 'HEADLINE_PARTICIPANTS_INPUT' | translate }}" disable="!leaderReady()">
-					<ng-include src="'views/04_participants.html'" />
-				</uib-tab>
-				<uib-tab index="tabs.confirm" heading="{{ 'HEADLINE_CONFIRM' | translate }}" disable="!participantsReady()">
-					<ng-include src="'views/05_confirm.html'" />
-				</uib-tab>
-			</uib-tabset>
-		</div>
-	
-		<div class="container" ng-show="registrationPerformed">
-			<div class="row">
-				<div class="col-xs-12">
-					<p translate="TEXT_SUCCESS"></p>
+		<section class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<div class="media">
+						<div class="media-left">
+							<img src="img/logo.png" class="media-object">
+						</div>
+						<div class="media-body">
+							<h1 class="media-heading">KONKRET<span class="pink">.</span> LIVE</h1>
+							<h2>Onlineanmeldung</h2>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
-		</div>
+		</section>
+		
+		<section class="content">
+			<div class="container" ng-show="!registrationPerformed">
+				<uib-tabset active="activeTab">
+					<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
+						<ng-include src="'views/01_hints.html'" />
+					</uib-tab>
+					<uib-tab index="tabs.group" heading="{{ 'HEADLINE_GROUP_INPUT' | translate }}">
+						<ng-include src="'views/02_group.html'" />
+					</uib-tab>
+					<uib-tab index="tabs.leader" heading="{{ 'HEADLINE_LEADER_INPUT' | translate }}" disable="!groupReady()">
+						<ng-include src="'views/03_leader.html'" />
+					</uib-tab>
+					<uib-tab index="tabs.participants" heading="{{ 'HEADLINE_PARTICIPANTS_INPUT' | translate }}" disable="!leaderReady()">
+						<ng-include src="'views/04_participants.html'" />
+					</uib-tab>
+					<uib-tab index="tabs.confirm" heading="{{ 'HEADLINE_CONFIRM' | translate }}" disable="!participantsReady()">
+						<ng-include src="'views/05_confirm.html'" />
+					</uib-tab>
+				</uib-tabset>
+			</div>
+		
+			<div class="container" ng-show="registrationPerformed">
+				<div class="row">
+					<div class="col-xs-12">
+						<p translate="TEXT_SUCCESS"></p>
+					</div>
+				</div>
+			</div>
+		</section>
 	
 		<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
 			<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
