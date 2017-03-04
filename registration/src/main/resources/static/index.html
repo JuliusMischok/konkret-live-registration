@@ -7,7 +7,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="/styles/konkretlive.registration.b49272c4363486fc07db.css">
+		<link rel="stylesheet" href="/styles/konkretlive.registration.ba9eeadcf162c4ca7e04.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,7 +18,7 @@
 	  	<style> .ng-cloak { display: none !important; } </style>
 	</head>
 	<body ng-controller="RegistrationController">
-		<div class="container">
+		<div class="container" ng-show="!registrationPerformed">
 			<uib-tabset active="activeTab">
 				<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
 					<ng-include src="'views/01_hints.html'" />
@@ -38,14 +38,22 @@
 			</uib-tabset>
 		</div>
 	
-		<div id="sf-message-container" style="display: none;" ng-show="alerts.length > 0">
+		<div class="container" ng-show="registrationPerformed">
+			<div class="row">
+				<div class="col-xs-12">
+					<p translate="TEXT_SUCCESS"></p>
+				</div>
+			</div>
+		</div>
+	
+		<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
 			<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
 				<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
 				{{alert.detail}}
 			</div>
 		</div>
 	
-		<script src="scripts/konkretlive.registration.91e2630b4e279822dc71.js"></script>
+		<script src="scripts/konkretlive.registration.8b125ef87747e920221d.js"></script>
 		<script src="conf/constants.js"></script>
 	</body>
 </html>

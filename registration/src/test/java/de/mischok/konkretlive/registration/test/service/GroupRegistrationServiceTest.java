@@ -109,5 +109,19 @@ public class GroupRegistrationServiceTest {
 			.body("field", Matchers.hasItem("leader.birthday"))
 			.body("code", Matchers.hasItem("fullage"))
 			;
+		
+		json = "{ \"group\": { \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1986-02-17T23:00:00.000Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"mobile\": \"0170/9350225\", \"medicalhints\": \"Baby\" } ] }";
+		
+		RestAssured.given()
+			.contentType(ContentType.JSON)
+			.body(json)
+		.when()
+			.post("registration")
+		.then()
+			.log().all()
+			.statusCode(HttpStatus.BAD_REQUEST.value())
+			.body("field", Matchers.hasItem("group.church"))
+			.body("code", Matchers.hasItem("NotBlank"))
+			;
 	}
 }

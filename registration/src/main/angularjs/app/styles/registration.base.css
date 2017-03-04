@@ -5,3 +5,12 @@ h1 {
 .anchor-link {
 	cursor-pointer;
 }
+
+#message-container {
+	background-color: rgba(0,0,0,0.5);
+	padding: 25px 25px 0 25px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 20000;
+}

@@ -1,6 +1,12 @@
 'use strict';
 
 var app = angular.module('registration')
+	.service('registrationService', ['$resource', 'backendServiceUrl', function($resource, backendServiceUrl) {
+			this.registration = function() {
+				return $resource(
+						backendServiceUrl + 'registration');
+			};
+	}])
 	.factory('grouptypeService', function() {
 		var grouptypes = [
 			{id: 'grouptype.teenkreis', title: 'Teenkreis'},

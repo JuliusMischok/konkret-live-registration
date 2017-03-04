@@ -14,6 +14,7 @@ import java.util.TimeZone;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,9 @@ public class RegistrationService {
 	@Autowired
 	private EmailService emailService;
 	
+	@Value("${mail.office}")
+	private String officeAddress;
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> saveRegistration(@RequestBody @Valid Registration registration, BindingResult bindingResult) {
 		Assert.notNull(registration);
@@ -111,9 +115,7 @@ public class RegistrationService {
 			String emailTextOffice = "Liebes Office,<br/><br/>es gibt eine neue Anmeldung für konkret live. Die Daten sind dieser E-Mail angehängt.<br/><br/>Viele Grüße!";
 			
 			this.emailService.sendEmail(registration.getLeader().getEmail(), "Anmeldebestätigung konkret live", emailText, "anmeldedaten.xls", attachmentStream);
-			// FIXME: Just for testing purposes!
-			//this.emailService.sendEmail("office@konkretlive.de", "Anmeldung " + this.getGroupType(registration.getGroup().getType()) + " " + registration.getGroup().getChurch(), emailTextOffice, "anmeldedaten.xls", attachmentStream);
-			this.emailService.sendEmail(registration.getLeader().getEmail(), "Anmeldung " + this.getGroupType(registration.getGroup().getType()) + " " + registration.getGroup().getChurch(), emailTextOffice, "anmeldedaten.xls", attachmentStream);
+			this.emailService.sendEmail(this.officeAddress, "Anmeldung " + this.getGroupType(registration.getGroup().getType()) + " " + registration.getGroup().getChurch(), emailTextOffice, "anmeldedaten.xls", attachmentStream);
 			
 		} catch (WriteException | IOException e) {
 			throw new MailPreparationException("Error creating excel file", e);
@@ -150,7 +152,7 @@ public class RegistrationService {
 		worksheet.addCell(new Label(0, 1, registration.getGroup().getChurch(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(1, 1, this.getGroupType(registration.getGroup().getType()), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(2, 1, this.getDistrict(registration.getGroup().getDistrict()), this.getNormalCellFormat()));
-		worksheet.addCell(new DateTime(3, 1, new Date(), this.getNormalDateCell()));
+		worksheet.addCell(new DateTime(3, 1, new Date(), this.getNormalDateTimeCell()));
 		worksheet.addCell(new jxl.write.Number(4, 1, this.getWholePrice(registration), this.getNormalCurrencyFormat()));
 		
 		return workbook;
@@ -257,12 +259,12 @@ public class RegistrationService {
 		worksheet.addCell(new jxl.write.Number(6, 1, this.getPrice(registration.getLeader().getPrice()), this.getNormalCurrencyFormat()));
 		worksheet.addCell(new Label(7, 1, registration.getLeader().isVegetarian() ? "1" : "", this.getNormalCellFormat()));
 		worksheet.addCell(new Label(8, 1, registration.getLeader().isFoodallergy() ? "1" : "", this.getNormalCellFormat()));
-		worksheet.addCell(new Label(9, 1, registration.getLeader().getStreet(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(9, 1, registration.getLeader().getMedicalhints(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(10, 1, registration.getLeader().getStreet(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(11, 1, registration.getLeader().getZipcode(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(12, 1, registration.getLeader().getCity(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(13, 1, registration.getLeader().getAddressextra(), this.getNormalCellFormat()));
-		worksheet.addCell(new Label(14, 1, registration.getLeader().isCounseling() ? "1" : "", this.getNormalCellFormat()));
+		worksheet.addCell(new Label(14, 1, registration.getLeader().isCounselling() ? "1" : "", this.getNormalCellFormat()));
 		worksheet.addCell(new Label(15, 1, registration.getGroup().getChurch(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(16, 1, this.getGroupType(registration.getGroup().getType()), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(17, 1, this.getDistrict(registration.getGroup().getDistrict()), this.getNormalCellFormat()));
@@ -279,7 +281,7 @@ public class RegistrationService {
 			worksheet.addCell(new jxl.write.Number(6, 2+i, this.getPrice(registration.getParticipants().get(i).getPrice()), this.getNormalCurrencyFormat()));
 			worksheet.addCell(new Label(7, 2+i, registration.getParticipants().get(i).isVegetarian() ? "1" : "", this.getNormalCellFormat()));
 			worksheet.addCell(new Label(8, 2+i, registration.getParticipants().get(i).isFoodallergy() ? "1" : "", this.getNormalCellFormat()));
-			worksheet.addCell(new Label(9, 2+i, "", this.getNormalCellFormat()));
+			worksheet.addCell(new Label(9, 2+i, registration.getParticipants().get(i).getMedicalhints(), this.getNormalCellFormat()));
 			worksheet.addCell(new Label(10, 2+i, "", this.getNormalCellFormat()));
 			worksheet.addCell(new Label(11, 2+i, "", this.getNormalCellFormat()));
 			worksheet.addCell(new Label(12, 2+i, "", this.getNormalCellFormat()));

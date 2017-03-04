@@ -2,14 +2,37 @@
 
 var app = angular.module('registration')
 	.controller('RegistrationController', ['$scope', function($scope) {
+		$scope.alerts = [];
+		
 		$scope.group = {};
 		$scope.leader = {};
 		$scope.participants = [];
+		
+		$scope.registrationPerformed = false;
+		
+		$scope.setRegistrationPerformed = function(state) {
+			$scope.registrationPerformed = state;
+		};
 		
 		$scope.initPopovers = function() {
 			angular.element('[data-toggle="popover"]').popover();
 		};
 
+		$scope.addAlert = function(type, title, detail) {
+			var alert = {title: title, detail: detail, type: type, timeout: type === 'danger' ? 10000 : 5000};
+			$scope.alerts.push(alert);
+			
+			angular.element('#sf-message-container').css('display', 'block');
+		};
+
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
+		$scope.closeAllAlerts = function() {
+			$scope.alerts = [];
+		};
+		
 		$scope.tabs = {
 			start: 0,
 			group: 1,
@@ -197,12 +220,14 @@ var app = angular.module('registration')
 				$uibModalInstance.dismiss('cancel');
 			};
 	}])
-	.controller('ConfirmController', ['$scope', 'priceService', 'grouptypeService', '$translate', '$window', function($scope, priceService, grouptypeService, $translate, $window) {
+	.controller('ConfirmController', ['$scope', 'priceService', 'grouptypeService', '$translate', '$window', 'registrationService', function($scope, priceService, grouptypeService, $translate, $window, registrationService) {
 		$scope.initPopovers();
 		$scope.hintPrivacyVisible = false;
 		$scope.hintSupervisionVisible = false;
 		$scope.privacyConfirmed = false;
 		$scope.supervisionConfirmed = false;
+		
+		$scope.registrationPending = false;
 		
 		$scope.registration = {
 			group: $scope.group,
@@ -214,8 +239,32 @@ var app = angular.module('registration')
 			$scope.setActiveTab($scope.tabs.participants);
 		};
 		
+		var registrationSuccessHandler = function(response) {
+			$scope.addAlert('success', $translate.instant('TITLE_REGISTRATION_SUCCESS'), $translate.instant('DETAIL_REGISTRATION_SUCCESS'));
+			
+			$scope.registrationPending = false;
+			$scope.setRegistrationPerformed(true);
+		};
+		
+		var registrationFailureHandler = function(response) {
+			if (response.status === 520) {
+				$scope.addAlert('danger', $translate.instant('TITLE_MAIL_NOT_SENT'), $translate.instant('DETAIL_MAIL_NOT_SENT'));
+			} else if (response.status === 400) {
+				$scope.addAlert('danger', $translate.instant('TITLE_INVALID_DATA'), $translate.instant('DETAIL_INVALID_DATA'));
+			} else if (response.status === 404) {
+				$scope.addAlert('danger', $translate.instant('TITLE_BACKEND_UNAVAILABLE'), $translate.instant('DETAIL_BACKEND_UNAVAILABLE'));
+			} else {
+				$scope.addAlert('danger', $translate.instant('TITLE_UNKNOWN_ERROR'), $translate.instant('DETAIL_UNKNOWN_ERROR'));
+			}
+			
+			$scope.registrationPending = false;
+		};
+		
 		$scope.register = function() {
-			$window.alert("Coming soon...");
+			$scope.registrationPending = true;
+			
+			registrationService.registration().save($scope.registration)
+					.$promise.then(registrationSuccessHandler, registrationFailureHandler);
 		};
 				
 		$scope.getPrice = function(person) {

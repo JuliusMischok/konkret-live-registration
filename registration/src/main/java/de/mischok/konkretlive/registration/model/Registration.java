@@ -2,6 +2,8 @@ package de.mischok.konkretlive.registration.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,12 +15,15 @@ public class Registration {
 	private String id;
 	
 	@DBRef
+	@Valid
 	private Group group;
 	
 	@DBRef
+	@Valid
 	private Leader leader;
 	
 	@DBRef
+	@Valid
 	private List<Person> participants;
 	
 	public Registration() {}

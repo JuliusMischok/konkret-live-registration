@@ -17,7 +17,7 @@ public class Leader extends Person {
 
 	private String addressextra;
 	
-	private boolean counseling;
+	private boolean counselling;
 	
 	public Leader() {}
 
@@ -80,14 +80,14 @@ public class Leader extends Person {
 	/**
 	 * @return the counseling
 	 */
-	public boolean isCounseling() {
-		return counseling;
+	public boolean isCounselling() {
+		return counselling;
 	}
 
 	/**
 	 * @param counseling the counseling to set
 	 */
-	public void setCounseling(boolean counseling) {
-		this.counseling = counseling;
+	public void setCounselling(boolean counseling) {
+		this.counselling = counseling;
 	}
 }
