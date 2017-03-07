@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 import javax.validation.Valid;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -383,10 +384,12 @@ public class RegistrationService {
 		Assert.notNull(bindingResult);
 		
 		Calendar calendar = new GregorianCalendar();
-		calendar.set(2017-18, Calendar.JUNE, 0, 23, 59, 59);
+		calendar.set(2017-18, Calendar.JUNE, 2, 21, 59, 59);
 		calendar.set(Calendar.MILLISECOND, 999);
 		calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
 		Date referenceDateInclusive = calendar.getTime();
+		
+		LoggerFactory.getLogger(this.getClass()).info("Checking full age. Person birthday: " + person.getBirthday() + ", referenceDateInclusive: " + referenceDateInclusive);
 		
 		if (person.getBirthday().after(referenceDateInclusive)) {
 			bindingResult.rejectValue("leader.birthday", "fullage", "Group leader has to be full aged at festival begin");

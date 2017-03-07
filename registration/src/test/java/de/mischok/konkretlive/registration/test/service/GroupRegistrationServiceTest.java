@@ -96,7 +96,7 @@ public class GroupRegistrationServiceTest {
 			.body("code", Matchers.hasItem("required"))
 			;
 		
-		json = "{ \"group\": { \"church\": \"FeG Augsburg-Mitte\", \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1999-06-01T23:59:59.999Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"medicalhints\": \"Baby\", \"mobile\": \"habkeins\" } ] }";
+		json = "{ \"group\": { \"church\": \"FeG Augsburg-Mitte\", \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1999-06-02T22:00:00.001Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"medicalhints\": \"Baby\", \"mobile\": \"habkeins\" } ] }";
 		
 		RestAssured.given()
 			.contentType(ContentType.JSON)
@@ -122,6 +122,21 @@ public class GroupRegistrationServiceTest {
 			.statusCode(HttpStatus.BAD_REQUEST.value())
 			.body("field", Matchers.hasItem("group.church"))
 			.body("code", Matchers.hasItem("NotBlank"))
+			;
+	}
+	
+	@Test
+	public void testValidationSuccess() {
+		String json = "{ \"group\": { \"church\": \"FeG Augsburg-Mitte\", \"type\": \"grouptype.jugendkreis\", \"district\": \"district.suedbayern\" }, \"leader\": { \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\", \"mobile\": \"01704109941\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"1999-06-01T22:00:00Z\", \"price\": \"price.vollverdiener\", \"vegetarian\": true }, \"participants\": [ { \"firstname\": \"Lenja\", \"lastname\": \"Mischok\", \"email\": \"lenja@mischok-it.de\", \"birthday\": \"2016-10-22T22:00:00.000Z\", \"price\": \"price.nichtverdiener\", \"foodallergy\": true, \"medicalhints\": \"Baby\", \"mobile\": \"habkeins\" } ] }";
+		
+		RestAssured.given()
+			.contentType(ContentType.JSON)
+			.body(json)
+		.when()
+			.post("registration")
+		.then()
+			.log().all()
+			.statusCode(HttpStatus.CREATED.value())
 			;
 	}
 }
