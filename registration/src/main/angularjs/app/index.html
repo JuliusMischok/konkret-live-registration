@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="registration">
 	<head>
-		<title>konkret live</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	   
+	   	<title>konkret live</title>
 		
 		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -51,19 +52,19 @@
 			<div class="container" ng-show="!registrationPerformed">
 				<uib-tabset active="activeTab">
 					<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
-						<ng-include src="'views/01_hints.html'" />
+						<ng-include src="'views/01_hints.html'"></ng-include>
 					</uib-tab>
 					<uib-tab index="tabs.group" heading="{{ 'HEADLINE_GROUP_INPUT' | translate }}">
-						<ng-include src="'views/02_group.html'" />
+						<ng-include src="'views/02_group.html'"></ng-include>
 					</uib-tab>
 					<uib-tab index="tabs.leader" heading="{{ 'HEADLINE_LEADER_INPUT' | translate }}" disable="!groupReady()">
-						<ng-include src="'views/03_leader.html'" />
+						<ng-include src="'views/03_leader.html'"></ng-include>
 					</uib-tab>
 					<uib-tab index="tabs.participants" heading="{{ 'HEADLINE_PARTICIPANTS_INPUT' | translate }}" disable="!leaderReady()">
-						<ng-include src="'views/04_participants.html'" />
+						<ng-include src="'views/04_participants.html'"></ng-include>
 					</uib-tab>
 					<uib-tab index="tabs.confirm" heading="{{ 'HEADLINE_CONFIRM' | translate }}" disable="!participantsReady()">
-						<ng-include src="'views/05_confirm.html'" />
+						<ng-include src="'views/05_confirm.html'"></ng-include>
 					</uib-tab>
 				</uib-tabset>
 			</div>
