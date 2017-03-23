@@ -15,6 +15,8 @@ var app = angular.module('registration')
 			HEADLINE_REGISTERED_PERSONS:			'Eingetragene Personen',
 			HEADLINE_PRICE:							'Teilnehmerbeitrag',
 			HEADLINE_REGISTER:						'Verbindliche Anmeldung',
+			HEADLINE_DATA_INPUT:					'Dateneingabe',
+			HEADLINE_STAFF_DATA:					'Deine Daten',
 			
 			FORM_LABEL_CHURCH:						'Gemeinde',
 			FORM_LABEL_GROUPTYPE:					'Gruppenart',
@@ -30,6 +32,12 @@ var app = angular.module('registration')
 			FORM_LABEL_PRICE:						'Preisgruppe',
 			FORM_LABEL_MEDICALHINTS:				'Medizinische Hinweise',
 			FORM_LABEL_BIRTHDAY:					'Geburtsdatum',
+			FORM_LABEL_NICKNAME:					'Spitzname',
+			FORM_LABEL_ARRIVAL:						'Anreise',
+			FORM_LABEL_DEPARTURE:					'Abreise',
+			FORM_LABEL_HOUSING:						'Unterbringung',
+			FORM_LABEL_OU:							'Bereich',
+			FORM_LABEL_ADMISSION:					'Mitarbeiterbeitrag',
 			
 			FORM_CHECKBOX_VEGETARIAN:				'Vegetarier',
 			FORM_CHECKBOX_FOODALLERGY:				'Lebensmittelallergien',
@@ -58,7 +66,14 @@ var app = angular.module('registration')
 			FORM_PLACEHOLDER_PARTICIPANT_PRICE:			'Preisgruppe...',
 			FORM_PLACEHOLDER_PARTICIPANT_MEDICALHINTS:	'Hinweise zu Allergien, chronischen Erkrankungen und Medikamenten...',
 			FORM_PLACEHOLDER_PARTICIPANT_BIRTHDAY:		'Geburtsdatum...',
-		
+			FORM_PLACEHOLDER_STAFF_NICKNAME:			'Dein Spitzname',
+			FORM_PLACEHOLDER_STAFF_ARRIVAL:				'Deine Anreisezeit',
+			FORM_PLACEHOLDER_STAFF_DEPARTURE:			'Deine Abreisezeit',
+			FORM_PLACEHOLDER_STAFF_HOUSING:				'Deine Unterbringung',
+			FORM_PLACEHOLDER_STAFF_OU:					'Dein Bereich',
+			FORM_PLACEHOLDER_STAFF_ADMISSION:			'Dein Mitarbeiterbeitrag',
+			FORM_PLACEHOLDER_STAFF_DISTRICT:			'Dein Bundeskreis',
+			
 			BUTTON_PROCEED:							'Weiter',
 			BUTTON_BACK:							'Zurück',
 			BUTTON_ADD_PARTICIPANT:					'Teilnehmer hinzufügen',
@@ -85,6 +100,10 @@ var app = angular.module('registration')
 			HINT_PERSON_MEDICALHINTS:				'Bitte alle bekannten Allergien und chronische Erkrankungen aufzählen, ebenso alle Medikamente, die regelmäßig eingenommen werden müssen. Diese Informationen werden an den Leiter der Ersten Hilfe weitergegeben, um auf dem Festivalgelände eine optimale medizinische Versorgung gewährleisten zu können.',
 			HINT_CONFIRM_PRIVACY:					'Die eingegebenen Daten werden von uns gespeichert und nur für Zwecke der Kreisjugendarbeit der Freien evangelischen Gemeinden Bayern verwendet. Mit einem formlosen Anschreiben an <a href="mailto:office@konkretlive.de">office@konkretlive.de</a> kann der Speicherung der Daten widersprochen werden, diese werden dann nach Ablauf des Festivals gelöscht.<br/>Die auf dem Festivalgelände angefertigten Fotos und Videoaufnahmen werden zur Nachberichterstattung und zu Werbezwecken in Digital- und Printmedien weiterverwendet. Möchte eine angemeldete Person der Veröffentlichung von Fotos und Videoaufnahmen widersprechen, ist dies durch formloses Anschreiben an <a href="mailto:office@konkretlive.de">office@konkretlive.de</a> und Einsendung eines Porträtfotos der entsprechenden Person möglich. Dieser Ausschluss bezieht sich allerdings nur auf die offiziellen Veröffentlichungen des Festivals; gegen eine Veröffentlichung durch FestivalteilnehmerInnen muss persönlich vorgegangen werden.',
 			HINT_CONFIRM_SUPERVISION:				'Natürlich gelten auch für euch auf dem Festival die Bestimmungen des Jugendschutzes. Die Erziehungsberechtigten von Minderjährigen übertragen durch die Unterschrift auf dem Anmeldebogen ihre Aufsichtspflicht an dich als LeiterIn.<br/>Wichtig: Informiere die Eltern mittels Flyer und Anmeldebogen, für was die Teens sich anmelden. Du gewährst keine Einzelbeaufsichtigung bei Einzelunternehmungen auf dem Festivalgelände. Vor Ort sind durch uns alle nötigen Sicherheitseinrichtungen gegeben (Erste Hilfe, Ordnungsteam, Telefon). Wir gehen davon aus, dass du deine Verantwortung wahrnimmst! Triff dazu die nötigen Abmachungen mit deinen Leuten, bevor das Festival losgeht.',
+			HINT_STAFF_NICKNAME:					'Falls hier ein Spitzname angegeben wird, wird dieser auf dem Mitarbeiter-Namensschild verwendet.',
+			HINT_STAFF_ARRIVAL_DEPARTURE:			'Anhand deiner Eingaben stellen wir dir ein Quartier bereit. Bitte gib uns daher auch Bescheid, wenn sich deine Anreise oder Abfahrt ändert.',
+			HINT_STAFF_HOUSING:						'Bei dem Wunsch auf die Unterbringung in einem Zimmer mit Bett trägt der Mitarbeitende die entstandenden Mehrkosten, sofern welche entstehen (z.B. Ferienwohnung). Die Anzahl der festen Unterkünfte ist begrenzt. Mobil eingeschränkte Personen, kranke Menschen und Familien werden bevorzugt.',
+			HINT_STAFF_ADMISSION:					'Die Kosten für Unterkunft & Verpflegung während des Festivals betragen pro Person ca. 55€. Daher bitten wir jede/n Mitarbeiter/in sich – wenn möglich – an diesen Kosten durch eine Spende von 35€ zu beteiligen. Gerne darfst du mehr geben; falls deine Mitarbeit aus finanziellen Gründen daran scheitern würde, darfst du die Zahl nach unten abändern oder auf 0 setzen.',
 			
 			TABLE_HEADER_FIRSTNAME:					'Vorname',
 			TABLE_HEADER_LASTNAME:					'Nachname',
@@ -113,6 +132,7 @@ var app = angular.module('registration')
 			TEXT_PRICE_BANK_TRANSFER:				'Bitte überweise den gesamten Teilnehmerbeitrag in Höhe von <strong>{{wholeprice}}&nbsp;&euro;</strong> auf das untenstehende Konto:<br/><br/><strong>IBAN:</strong> DE42 4526 0475 0015 3744 00<br/><strong>BIC:</strong> GENODEM1BFG<br/><strong>Bank:</strong> SKB Witten<br/><strong>Kontoinhaber:</strong> FeG Würzburg - Zeltlagerarbeit-<br/><strong>Verwendungszweck:</strong> Teilnehmerbeitrag {{transferusage}}',
 			TEXT_START:								'Schön, dass du mit deiner Gruppe bei konkret live dabei sein willst!<br/>Bitte beachte die folgenden Hinweise:<ul><li>Die Anmeldung ist nur als komplette Gruppe möglich.</li><li>Jede Gruppe benötigt einen volljährigen Gruppenleiter.</li><li>Änderung von Daten, Ab- oder Nachmeldungen sind nur über <a href="mailto:office@konkretlive.de">office@konkretlive.de</a> möglich.</li></ul>',
 			TEXT_SUCCESS:							'<h1>Anmeldung abgeschlossen!</h1>Deine Anmeldedaten wurden gespeichert. Falls du Rückfragen hast oder innerhalb der nächsten 10 Minuten keine Bestätigungsmail erhältst, wende dich bitte an <a href="mailto:office@konkretlive.de">office@konkretlive.de</a>, hier kannst du auch Teilnehmer nach- oder abmelden.',
+			TEXT_STAFF_START:						'Schön, dass du bei konkret live mitarbeiten möchtest!',
 			
 			DETAIL_REGISTRATION_SUCCESS:			'Deine Anmeldedaten wurden erfolgreich gespeichert. Du erhältst in Kürze eine Bestätigung per E-Mail.',
 			DETAIL_MAIL_NOT_SENT:					'Die E-Mail konnte nicht verschickt werden. Bitte wende dich an office@konkretlive.de um das weitere Vorgehen zu klären.',

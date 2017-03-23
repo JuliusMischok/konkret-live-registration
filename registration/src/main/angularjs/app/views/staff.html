@@ -1,0 +1,21 @@
+<div class="container" ng-show="!registrationPerformed">
+	<uib-tabset active="activeTab">
+		<uib-tab index="tabs.start" heading="{{ 'HEADLINE_HINTS_START' | translate }}">
+			<ng-include src="'views/01_staff_hints.html'"></ng-include>
+		</uib-tab>
+		<uib-tab index="tabs.group" heading="{{ 'HEADLINE_DATA_INPUT' | translate }}">
+			<ng-include src="'views/02_staff_person.html'"></ng-include>
+		</uib-tab>
+		<uib-tab index="tabs.confirm" heading="{{ 'HEADLINE_CONFIRM' | translate }}" disable="!personReady()">
+			<ng-include src="'views/05_staff_confirm.html'"></ng-include>
+		</uib-tab>
+	</uib-tabset>
+</div>
+
+<div class="container" ng-show="registrationPerformed">
+	<div class="row">
+		<div class="col-xs-12">
+			<p translate="TEXT_STAFF_SUCCESS"></p>
+		</div>
+	</div>
+</div>

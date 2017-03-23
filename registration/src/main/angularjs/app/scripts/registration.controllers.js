@@ -1,18 +1,8 @@
 'use strict';
 
 var app = angular.module('registration')
-	.controller('RegistrationController', ['$scope', function($scope) {
+	.controller('PageController', ['$scope', function($scope) {
 		$scope.alerts = [];
-		
-		$scope.group = {};
-		$scope.leader = {};
-		$scope.participants = [];
-		
-		$scope.registrationPerformed = false;
-		
-		$scope.setRegistrationPerformed = function(state) {
-			$scope.registrationPerformed = state;
-		};
 		
 		$scope.initPopovers = function() {
 			angular.element('[data-toggle="popover"]').popover();
@@ -31,6 +21,17 @@ var app = angular.module('registration')
 		
 		$scope.closeAllAlerts = function() {
 			$scope.alerts = [];
+		};
+	}])
+	.controller('GroupRegistrationController', ['$scope', function($scope) {
+		$scope.group = {};
+		$scope.leader = {};
+		$scope.participants = [];
+		
+		$scope.registrationPerformed = false;
+		
+		$scope.setRegistrationPerformed = function(state) {
+			$scope.registrationPerformed = state;
 		};
 		
 		$scope.tabs = {
@@ -301,6 +302,56 @@ var app = angular.module('registration')
 		$scope.registrationPossible = function() {
 			return $scope.privacyConfirmed && $scope.supervisionConfirmed;
 		};
+	}])
+	.controller('StaffRegistrationController', ['$scope', function($scope) {
+		$scope.person = {};
+		$scope.registrationPerformed = false;
+		
+		$scope.setRegistrationPerformed = function(state) {
+			$scope.registrationPerformed = state;
+		};
+		
+		$scope.tabs = {
+			start: 0,
+			person: 1,
+			confirm: 2
+		};
+		
+		$scope.activeTab = $scope.tabs.start;
+		
+		$scope.personform = undefined;
+		
+		$scope.setPersonform = function(personform) {
+			$scope.personform = personform;
+		};
+
+		$scope.setActiveTab = function(index) {
+			$scope.activeTab = index;
+		};
+		
+		$scope.personReady = function() {
+			return typeof $scope.personform !== typeof undefined && $scope.personform.$valid;
+		};
+		
+		$scope.showPopover = function($event) {
+			console.log('show popover', $event);
+			
+			$event.stopPropagation();
+		};
+	}])
+	.controller('StaffStartHintsController', ['$scope', function($scope) {
+		console.log('Staff start');
+		
+		$scope.proceed = function() {
+			$scope.setPersonform($scope.personform);
+		};
+	}])
+	.controller('StaffPersonInputController', ['$scope', function($scope) {
+		console.log('Staff person');
+		$scope.initPopovers();
+	}])
+	.controller('StaffConfirmController', ['$scope', function($scope) {
+		console.log('Staff confirm');
 	}])
 	;
 				

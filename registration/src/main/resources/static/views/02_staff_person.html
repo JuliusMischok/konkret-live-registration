@@ -1,0 +1,250 @@
+<h1 translate="HEADLINE_STAFF_DATA"></h1>
+
+<form name="staffform" novalidate="novalidate" ng-controller="StaffPersonInputController">
+	<div class="form-group" ng-class="{'has-error': staffform.firstname.$invalid && staffform.firstname.$touched}">
+		<label class="control-label" for="firstname" translate="FORM_LABEL_FIRSTNAME"></label>
+		<input class="form-control" type="text" name="firstname" ng-model="staff.firstname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_FIRSTNAME' | translate }}" required />
+		<div ng-messages="staffform.firstname.$error" class="kl-message-validation" ng-show="staffform.firstname.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_FIRSTNAME' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.lastname.$invalid && staffform.lastname.$touched}">
+		<label class="control-label" for="lastname" translate="FORM_LABEL_LASTNAME"></label>
+		<input class="form-control" type="text" name="lastname" ng-model="staff.lastname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_LASTNAME' | translate }}" required />
+		<div ng-messages="staffform.lastname.$error" class="kl-message-validation" ng-show="staffform.lastname.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_LASTNAME' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.street.$invalid && staffform.street.$touched}">
+		<label class="control-label" for="street" translate="FORM_LABEL_STREET"></label>
+		<input class="form-control" type="text" name="street" ng-model="staff.street" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_STREET' | translate }}" required />
+		<div ng-messages="staffform.street.$error" class="kl-message-validation" ng-show="staffform.street.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_STREET' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_STREET' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.zipcode.$invalid && staffform.zipcode.$touched}">
+		<label class="control-label" for="zipcode" translate="FORM_LABEL_ZIPCODE"></label>
+		<input class="form-control" type="text" name="zipcode" ng-model="staff.zipcode" maxlength="5" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ZIPCODE' | translate }}" required />
+		<div ng-messages="staffform.zipcode.$error" class="kl-message-validation" ng-show="staffform.zipcode.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_ZIPCODE' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ZIPCODE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.city.$invalid && staffform.city.$touched}">
+		<label class="control-label" for="city" translate="FORM_LABEL_CITY"></label>
+		<input class="form-control" type="text" name="city" ng-model="staff.city" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_CITY' | translate }}" required />
+		<div ng-messages="staffform.city.$error" class="kl-message-validation" ng-show="staffform.city.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_CITY' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_CITY' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.addressextra.$invalid && staffform.addressextra.$touched}">
+		<label class="control-label" for="addressextra" translate="FORM_LABEL_ADDRESSEXTRA"></label>
+		<input class="form-control" type="text" name="addressextra" ng-model="staff.addressextra" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ADDRESSEXTRA' | translate }}" />
+		<div ng-messages="staffform.addressextra.$error" class="kl-message-validation" ng-show="staffform.addressextra.$touched">
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADDRESSEXTRA' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.mobile.$invalid && staffform.mobile.$touched}">
+		<label class="control-label" for="mobile">
+			{{ 'FORM_LABEL_MOBILE' | translate }}
+			<a uib-popover="{{ 'HINT_LEADER_MOBILE' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<input class="form-control" type="text" name="mobile" ng-model="staff.mobile" maxlength="20" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MOBILE' | translate }}" required />
+		<div ng-messages="staffform.mobile.$error" class="kl-message-validation" ng-show="staffform.mobile.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MOBILE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.email.$invalid && staffform.email.$touched}">
+		<label class="control-label" for="email">
+			{{ 'FORM_LABEL_EMAIL' | translate }}
+			<a uib-popover="{{ 'HINT_PERSON_EMAIL' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<input class="form-control" type="email" name="email" ng-model="staff.email" maxlength="255" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_EMAIL' | translate }}" required />
+		<div ng-messages="staffform.email.$error" class="kl-message-validation" ng-show="staffform.email.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+			<p ng-message="email" translate="MESSAGE_VALIDATION_INVALID" translate-value-field="{{ 'FORM_LABEL_EMAIL' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.birthday.$invalid && staffform.birthday.$touched}">
+		<label class="control-label" for="birthday" translate="FORM_LABEL_BIRTHDAY"></label>
+		<p class="input-group">
+			<input class="form-control" type="text" name="birthday" ng-model="staff.birthday" ng-focus="openBirthdayPopup()" maxlength="10" ng-blur="validateBirthday()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="birthdaypopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_BIRTHDAY' | translate }}" required />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="birthdaypopup.opened = !birthdaypopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+			</span>
+		</p>
+		<div ng-messages="staffform.birthday.$error" class="kl-message-validation" ng-show="staffform.birthday.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+			<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_BIRTHDAY' | translate }}"></p>
+		</div>
+	</div>
+			
+	<div class="form-group" ng-class="{'has-error': staffform.vegetarian.$invalid && staffform.vegetarian.$touched}">
+		<div class="checkbox">
+			<label><input type="checkbox" ng-model="staff.vegetarian">{{ 'FORM_CHECKBOX_VEGETARIAN' | translate }}</label>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.foodallergy.$invalid && staffform.foodallergy.$touched}">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="staff.foodallergy">{{ 'FORM_CHECKBOX_FOODALLERGY' | translate }}
+				<a uib-popover="{{ 'HINT_LEADER_FOODALLERGY' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.medicalhints.$invalid && staffform.medicalhints.$touched}">
+		<label class="control-label" for="medicalhints">
+				{{ 'FORM_LABEL_MEDICALHINTS' | translate }}
+				<a uib-popover="{{ 'HINT_PERSON_MEDICALHINTS' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+					<i class="fa fa-info-circle"></i>
+				</a>
+			</label>
+		<textarea class="form-control" name="medicalhints" ng-model="staff.medicalhints" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_MEDICALHINTS' | translate }}"></textarea>
+		<div ng-messages="staffform.medicalhints.$error" class="kl-message-validation" ng-show="staffform.medicalhints.$touched">
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_MEDICALHINTS' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.district.$invalid && staffform.district.$touched}">
+		<label class="control-label" for="district">
+			{{ 'FORM_LABEL_DISTRICT' | translate }}
+			<a uib-popover="{{ 'HINT_GROUP_DISTRICT' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<select class="form-control" name="district" ng-model="staff.district" required>
+			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_STAFF_DISTRICT" />
+			<option ng-repeat="district in districts" value="{{ district.id }}">{{ district.title }}</option>
+		</select>
+		<div ng-messages="staffform.district.$error" class="kl-message-validation" ng-show="staffform.district.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_DISTRICT' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.nickname.$invalid && staffform.nickname.$touched}">
+		<label class="control-label" for="nickname">
+			{{ 'FORM_LABEL_NICKNAME' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_NICKNAME' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<input class="form-control" type="text" name="nickname" ng-model="staff.nickname" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_NICKNAME' | translate }}" required />
+		<div ng-messages="staffform.nickname.$error" class="kl-message-validation" ng-show="staffform.nickname.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_NICKNAME' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_NICKNAME' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.arrival.$invalid && staffform.arrival.$touched}">
+		<label class="control-label" for="arrival">
+			{{ 'FORM_LABEL_ARRIVAL' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_ARRIVAL_DEPARTURE' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<p class="input-group">
+			<input class="form-control" type="text" name="arrival" ng-model="staff.arrival" ng-focus="openArrivalPopup()" maxlength="10" ng-blur="validateArrival()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="arrivalpopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ARRIVAL' | translate }}" required />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="arrivalpopup.opened = !arrivalpopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+			</span>
+		</p>
+		<div ng-messages="staffform.arrival.$error" class="kl-message-validation" ng-show="staffform.arrival.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_ARRIVAL' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ARRIVAL' | translate }}"></p>
+			<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_ARRIVAL' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.departure.$invalid && staffform.departure.$touched}">
+		<label class="control-label" for="departure">
+			{{ 'FORM_LABEL_DEPARTURE' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_ARRIVAL_DEPARTURE' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<p class="input-group">
+			<input class="form-control" type="text" name="departure" ng-model="staff.departure" ng-focus="openBirthdayPopup()" maxlength="10" ng-blur="validateBirthday()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="departurepopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_DEPARTURE' | translate }}" required />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="departurepopup.opened = !departurepopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
+			</span>
+		</p>
+		<div ng-messages="staffform.departure.$error" class="kl-message-validation" ng-show="staffform.departure.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_DEPARTURE' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_DEPARTURE' | translate }}"></p>
+			<p ng-message="date" translate="MESSAGE_VALIDATION_INVALID_DATE" translate-value-field="{{ 'FORM_LABEL_DEPARTURE' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.housing.$invalid && staffform.housing.$touched}">
+		<label class="control-label" for="housing">
+			{{ 'FORM_LABEL_HOUSING' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_HOUSING' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<select class="form-control" name="housing" ng-model="staff.housing" required>
+			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_STAFF_HOUSING" />
+			<option ng-repeat="housing in housings" value="{{ housing.id }}">{{ housing.title }}</option>
+		</select>
+		<div ng-messages="staffform.housing.$error" class="kl-message-validation" ng-show="staffform.housing.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_HOUSING' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.ou.$invalid && staffform.ou.$touched}">
+		<label class="control-label" for="ou">
+			{{ 'FORM_LABEL_OU' | translate }}
+		</label>
+		<select class="form-control" name="ou" ng-model="staff.ou" required>
+			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_STAFF_OU" />
+			<option ng-repeat="ou in ous" value="{{ ou.id }}">{{ ou.title }}</option>
+		</select>
+		<div ng-messages="staffform.ou.$error" class="kl-message-validation" ng-show="staffform.ou.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_OU' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.admission.$invalid && staffform.admission.$touched}">
+		<label class="control-label" for="admission">
+			{{ 'FORM_LABEL_ADMISSION' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_ADMISSION' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<input class="form-control" type="text" name="admission" ng-model="staff.admission" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ADMISSION' | translate }}" required />
+		<div ng-messages="staffform.admission.$error" class="kl-message-validation" ng-show="staffform.admission.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
+			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
+		</div>
+	</div>
+	
+	{{ staff | json }}
+	
+	<div class="form-group">
+		<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
+		<button class="btn btn-primary" ng-disabled="!staffform.$valid" translate="BUTTON_PROCEED" ng-click="proceed()"></button>
+	</div>
+</form>
