@@ -46,16 +46,16 @@
 		
 		<section class="content" ng-controller="PageController">
 			<div ui-view></div>
+			
+			<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
+				<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
+					<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
+					{{alert.detail}}
+				</div>
+			</div>
 		</section>
 	
-		<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
-			<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
-				<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
-				{{alert.detail}}
-			</div>
-		</div>
-	
-		<script src="scripts/konkretlive.registration.8885b099d4a6f32d4ac7.js"></script>
+		<script src="scripts/konkretlive.registration.88bb8c2671fa02144a1b.js"></script>
 		<script src="conf/constants.js"></script>
 	</body>
 </html>

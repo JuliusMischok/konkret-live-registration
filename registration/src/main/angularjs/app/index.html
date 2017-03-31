@@ -52,14 +52,14 @@
 		
 		<section class="content" ng-controller="PageController">
 			<div ui-view></div>
-		</section>
-	
-		<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
-			<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
-				<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
-				{{alert.detail}}
+			
+			<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
+				<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
+					<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
+					{{alert.detail}}
+				</div>
 			</div>
-		</div>
+		</section>
 	
 		<!-- build:js scripts/konkretlive.registration.js -->
 			<script src="../bower_components/jquery/dist/jquery.min.js"></script>

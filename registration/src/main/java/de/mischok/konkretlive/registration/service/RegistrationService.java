@@ -101,6 +101,7 @@ public class RegistrationService {
 				
 				return ResponseEntity.created(location).build();
 			} catch (MailException e) {
+				e.printStackTrace();
 				return ResponseEntity.status(520).body("Sending confirmation email failed");
 			}
 		}
@@ -249,6 +250,7 @@ public class RegistrationService {
 		worksheet.addCell(new Label(16, 0, "Gruppenart", this.getBoldCellFormat()));
 		worksheet.addCell(new Label(17, 0, "Bundeskreis", this.getBoldCellFormat()));
 		worksheet.addCell(new Label(18, 0, "Anmeldedatum", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(19, 0, "Art", this.getBoldCellFormat()));
 		
 		// Leader
 		worksheet.addCell(new Label(0, 1, registration.getLeader().getFirstname(), this.getNormalCellFormat()));
@@ -270,6 +272,7 @@ public class RegistrationService {
 		worksheet.addCell(new Label(16, 1, this.getGroupType(registration.getGroup().getType()), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(17, 1, this.getDistrict(registration.getGroup().getDistrict()), this.getNormalCellFormat()));
 		worksheet.addCell(new DateTime(18, 1, new Date(), this.getNormalDateTimeCell()));
+		worksheet.addCell(new Label(19, 1, "GL", this.getNormalCellFormat()));
 		
 		// Participants
 		for (int i=0; i<registration.getParticipants().size(); i++) {
@@ -292,7 +295,7 @@ public class RegistrationService {
 			worksheet.addCell(new Label(16, 2+i, this.getGroupType(registration.getGroup().getType()), this.getNormalCellFormat()));
 			worksheet.addCell(new Label(17, 2+i, this.getDistrict(registration.getGroup().getDistrict()), this.getNormalCellFormat()));
 			worksheet.addCell(new DateTime(18, 2+i, new Date(), this.getNormalDateTimeCell()));
-			
+			worksheet.addCell(new Label(19, 2+i, "TN", this.getNormalCellFormat()));
 		}
 		
 		return workbook;

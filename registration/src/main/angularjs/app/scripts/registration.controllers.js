@@ -248,6 +248,9 @@ var app = angular.module('registration')
 		};
 		
 		var registrationFailureHandler = function(response) {
+			console.log('registration failed: ', response);
+			console.log(typeof $scope.addAlert);
+			
 			if (response.status === 520) {
 				$scope.addAlert('danger', $translate.instant('TITLE_MAIL_NOT_SENT'), $translate.instant('DETAIL_MAIL_NOT_SENT'));
 			} else if (response.status === 400) {
