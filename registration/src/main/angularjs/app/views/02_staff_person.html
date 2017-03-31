@@ -166,7 +166,7 @@
 			</a>
 		</label>
 		<p class="input-group">
-			<input class="form-control" type="text" name="arrival" ng-model="staff.arrival" ng-focus="openArrivalPopup()" maxlength="10" ng-blur="validateArrival()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="arrivalpopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ARRIVAL' | translate }}" required />
+			<input class="form-control" type="text" name="arrival" ng-model="staff.arrival" ng-focus="openArrivalPopup()" maxlength="10" ng-blur="validateArrival()" alt-input-formats="['d!.M!.yyyy HH:mm', 'd!.M!.yy HH:mm']" uib-datepicker-popup="dd.MM.yyyy HH:mm" is-open="arrivalpopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ARRIVAL' | translate }}" required />
 			<span class="input-group-btn">
 				<button type="button" class="btn btn-default" ng-click="arrivalpopup.opened = !arrivalpopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
 			</span>
@@ -186,7 +186,7 @@
 			</a>
 		</label>
 		<p class="input-group">
-			<input class="form-control" type="text" name="departure" ng-model="staff.departure" ng-focus="openBirthdayPopup()" maxlength="10" ng-blur="validateBirthday()" alt-input-formats="['d!.M!.yyyy', 'd!.M!.yy']" uib-datepicker-popup="dd.MM.yyyy" is-open="departurepopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_DEPARTURE' | translate }}" required />
+			<input class="form-control" type="text" name="departure" ng-model="staff.departure" ng-focus="openBirthdayPopup()" maxlength="10" ng-blur="validateBirthday()" alt-input-formats="['d!.M!.yyyy HH:mm', 'd!.M!.yy HH:mm']" uib-datepicker-popup="dd.MM.yyyy HH:mm" is-open="departurepopup.opened" datepicker-options="dateOptions" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_DEPARTURE' | translate }}" required />
 			<span class="input-group-btn">
 				<button type="button" class="btn btn-default" ng-click="departurepopup.opened = !departurepopup.opened"><i class="glyphicon glyphicon-calendar"></i></button>
 			</span>

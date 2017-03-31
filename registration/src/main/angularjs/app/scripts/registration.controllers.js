@@ -347,11 +347,39 @@ var app = angular.module('registration')
 		
 		$scope.proceed = function() {
 			$scope.setPersonform($scope.personform);
+			$scope.setActiveTab($scope.tabs.person);
 		};
 	}])
 	.controller('StaffPersonInputController', ['$scope', function($scope) {
 		console.log('Staff person');
+		
+		$scope.birthdaypopup = {opened: false};
+		$scope.arrivalpopup = {opened: false};
+		$scope.departurepopup = {opened: false};
+		
 		$scope.initPopovers();
+		
+		$scope.dateOptionsBirthday = {
+			formatYear : 'yyyy',
+			startingDay : 1,
+			maxDate : maxDateInclusive,
+			initDate : maxDateInclusive
+		};
+		
+		$scope.dateOptionsArrival = {
+				formatYear : 'yyyy',
+				startingDay : 1,
+				maxDate : maxDateInclusive,
+				initDate : maxDateInclusive
+		};
+		
+		$scope.dateOptionsDeparture = {
+				formatYear : 'yyyy',
+				startingDay : 1,
+				maxDate : maxDateInclusive,
+				initDate : maxDateInclusive
+		};
+		
 	}])
 	.controller('StaffConfirmController', ['$scope', function($scope) {
 		console.log('Staff confirm');
