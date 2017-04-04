@@ -44,6 +44,8 @@ var app = angular.module('registration')
 			FORM_CHECKBOX_COUNSELLING:				'Mitarbeit B-Team Seelsorge',
 			FORM_CHECKBOX_PRIVACY:					'Ich habe die Hinweise zum Datenschutz gelesen.',
 			FORM_CHECKBOX_SUPERVISION:				'Ich habe die Hinweise zur Aufsichtspflicht gelesen.',
+			FORM_CHECKBOX_ARRIVAL_CONFIRMED:		'Ich habe die abweichende Ankunftszeit mit meinem Bereichsleiter abgesprochen.',
+			FORM_CHECKBOX_DEPARTURE_CONFIRMED:		'Ich habe die abweichende Abreisezeit mit meinem Bereichsleiter abgesprochen.',
 			
 			FORM_PLACEHOLDER_CHURCH:					'Eure Gemeinde...',
 			FORM_PLACEHOLDER_GROUPTYPE:					'Eure Gruppenart...',
@@ -104,6 +106,7 @@ var app = angular.module('registration')
 			HINT_STAFF_ARRIVAL_DEPARTURE:			'Anhand deiner Eingaben stellen wir dir ein Quartier bereit. Bitte gib uns daher auch Bescheid, wenn sich deine Anreise oder Abfahrt ändert.',
 			HINT_STAFF_HOUSING:						'Bei dem Wunsch auf die Unterbringung in einem Zimmer mit Bett trägt der Mitarbeitende die entstandenden Mehrkosten, sofern welche entstehen (z.B. Ferienwohnung). Die Anzahl der festen Unterkünfte ist begrenzt. Mobil eingeschränkte Personen, kranke Menschen und Familien werden bevorzugt.',
 			HINT_STAFF_ADMISSION:					'Die Kosten für Unterkunft & Verpflegung während des Festivals betragen pro Person ca. 55€. Daher bitten wir jede/n Mitarbeiter/in sich – wenn möglich – an diesen Kosten durch eine Spende von 35€ zu beteiligen. Gerne darfst du mehr geben; falls deine Mitarbeit aus finanziellen Gründen daran scheitern würde, darfst du die Zahl nach unten abändern oder auf 0 setzen.',
+			HINT_ATTENDANCE_CONFIRMATION:			'Für Auf- und Abbau, inbesondere des Veranstaltungszeltes benötigen wir jede helfende Hand! Daher sind alle Mitarbeiter angehalten, vor dem {{from}} Uhr an- und nach dem {{to}} Uhr abzureisen.',
 			
 			TABLE_HEADER_FIRSTNAME:					'Vorname',
 			TABLE_HEADER_LASTNAME:					'Nachname',

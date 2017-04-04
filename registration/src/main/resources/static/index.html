@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="registration">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	   
+	   	<title>konkret live</title>
+		
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		
+		<script src="https://use.fontawesome.com/7fca29453c.js"></script>
+
+		<link rel="stylesheet" href="/styles/konkretlive.registration.630de35d0e2eeb4d97c1.css">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+	    	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	    	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	  	<![endif]-->
+	  	
+	  	<link rel='stylesheet' id='illdy-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900,700,300,300italic|Raleway:400,900|Roboto:300,400' type='text/css' media='all' />
+	  	<style> .ng-cloak { display: none !important; } </style>
+	</head>
+	<body>
+		<section class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<div class="media">
+						<div class="media-left">
+							<img src="img/logo.png" class="media-object">
+						</div>
+						<div class="media-body">
+							<h1 class="media-heading">KONKRET<span class="pink">.</span> LIVE</h1>
+							<h2>Onlineanmeldung</h2>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="content" ng-controller="PageController">
+			<div ui-view></div>
+			
+			<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
+				<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
+					<strong ng-if="alert.title.length > 0">{{alert.title}}:</strong>
+					{{alert.detail}}
+				</div>
+			</div>
+		</section>
+	
+		<script src="scripts/konkretlive.registration.52b45fe2665623dc7e88.js"></script>
+		<script src="conf/constants.js"></script>
+	</body>
+</html>

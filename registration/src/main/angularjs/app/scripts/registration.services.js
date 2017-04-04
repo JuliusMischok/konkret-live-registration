@@ -75,5 +75,42 @@ var app = angular.module('registration')
 			}
 		};
 	})
+	
+	.factory('housingService', function() {
+		var housings = [
+			{id: 'housing.self', title: 'Ich kümmere mich selbst'},
+			{id: 'housing.tent', title: 'Mitarbeiterschlafzelt'},
+			{id: 'housing.bed', title: 'Zimmer mit Bett'},
+			{id: 'housing.other', title: 'Sonstiges'}
+		];
+		
+		return {
+			housings: function() {
+				return [].concat(housings);
+			}
+		};
+	})
+	
+	.factory('ouService', function() {
+		var ous = [
+			{id: 'ou.decentral', title: 'Dezentrales Programm'},
+			{id: 'ou.general', title: 'Gesamtleitung'},
+			{id: 'ou.hosting', title: 'Hosting'},
+			{id: 'ou.logistics', title: 'Logistik'},
+			{id: 'ou.staffservice', title: 'Mitarbeiter-Service'},
+			{id: 'ou.pr', title: 'Öffentlichkeitsarbeit'},
+			{id: 'ou.office', title: 'Office'},
+			{id: 'ou.counseling', title: 'Seelsorge'},
+			{id: 'ou.soundandlight', title: 'Technik'},
+			{id: 'ou.central', title: 'Zentrales Programm'},
+			{id: 'ou.other', title: 'Sonstiges'}
+		]; 
+			
+		return {
+			ous: function() {
+				return [].concat(ous);
+			}
+		};
+	})
 	;
 				

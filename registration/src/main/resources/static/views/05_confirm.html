@@ -1,0 +1,87 @@
+<div ng-controller="ConfirmController">
+	<h1 translate="HEADLINE_REGISTERED_PERSONS"></h1>
+	
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th translate="TABLE_HEADER_FIRSTNAME"></th>
+					<th translate="TABLE_HEADER_LASTNAME"></th>
+					<th translate="TABLE_HEADER_MOBILE"></th>
+					<th translate="TABLE_HEADER_EMAIL"></th>
+					<th translate="TABLE_HEADER_BIRTHDAY"></th>
+					<th translate="TABLE_HEADER_PRICE"></th>
+					<th translate="TABLE_HEADER_VEGETARIAN"></th>
+					<th translate="TABLE_HEADER_FOOD_ALLERGIES"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="person in getPersons()">
+					<td>{{person.firstname}}</td>
+					<td>{{person.lastname}}</td>
+					<td>{{person.mobile}}</td>
+					<td>{{person.email}}</td>
+					<td>{{person.birthday | date:'dd.MM.yyyy'}}</td>
+					<td>{{ getPrice(person) | number:2 }}&nbsp;&euro;</td>
+					<td>
+						<i ng-show="person.vegetarian" class="fa fa-check"></i>
+					</td>
+					<td>
+						<i ng-show="person.foodallergy" class="fa fa-check"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<h1 translate="HEADLINE_PRICE"></h1>
+	<p translate="TEXT_PRICE_BANK_TRANSFER" translate-value-wholeprice="{{ getWholeprice() | number:2 }}" translate-value-transferusage="{{ getTransferUsagePlaceholder() }}"></p>
+	
+	<h1 translate="HEADLINE_REGISTER"></h1>
+	<form name="confirmform">
+		<div class="form-group">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" ng-model="privacyConfirmed">
+					{{ 'FORM_CHECKBOX_SUPERVISION' | translate }}
+					<span class="kl-confirm-hint-toggle">
+						<a href="#" ng-click="toggleHintPrivacy()" ng-show="!hintPrivacyVisible">
+							{{ 'TEXT_SHOW_PRIVACY' | translate }}
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<a href="#" ng-click="toggleHintPrivacy()" ng-show="hintPrivacyVisible">
+							{{ 'TEXT_HIDE_PRIVACY' | translate }}
+							<i class="fa fa-caret-up"></i>
+						</a>
+					</span>
+					<p class="kl-confirm-hint" ng-show="hintPrivacyVisible" translate="HINT_CONFIRM_PRIVACY"></p>
+				</label>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" ng-model="supervisionConfirmed">
+					{{ 'FORM_CHECKBOX_PRIVACY' | translate }}
+					<span class="kl-confirm-hint-toggle">
+						<a href="#" ng-click="toggleHintSupervision()" ng-show="!hintSupervisionVisible">
+							{{ 'TEXT_SHOW_SUPERVISION' | translate }}
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<a href="#" ng-click="toggleHintSupervision()" ng-show="hintSupervisionVisible">
+							{{ 'TEXT_HIDE_SUPERVISION' | translate }}
+							<i class="fa fa-caret-up"></i>
+						</a>
+					</span>
+					<p class="kl-confirm-hint" ng-show="hintSupervisionVisible" translate="HINT_CONFIRM_SUPERVISION"></p>
+				</label>
+			</div>
+		</div>
+		 
+		<div class="form-group">
+			<button class="btn btn-default" translate="BUTTON_BACK" ng-click="back()"></button>
+			<button class="btn btn-primary" ng-disabled="!registrationPossible() || registrationPending" translate="BUTTON_REGISTER" ng-click="register()"></button>
+		</div>
+	</form>
+</div>

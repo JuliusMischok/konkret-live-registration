@@ -350,36 +350,69 @@ var app = angular.module('registration')
 			$scope.setActiveTab($scope.tabs.person);
 		};
 	}])
-	.controller('StaffPersonInputController', ['$scope', function($scope) {
+	.controller('StaffPersonInputController', ['$scope', 'housingService', 'ouService', 'districtService', function($scope, housingService, ouService, districtService) {
 		console.log('Staff person');
+		
+		$scope.staff = {
+			arrivalconfirmed: false,
+			departureconfirmed: false
+		};
 		
 		$scope.birthdaypopup = {opened: false};
 		$scope.arrivalpopup = {opened: false};
 		$scope.departurepopup = {opened: false};
 		
+		$scope.arrivalMax = new Date(2017, 5, 1, 8, 0, 0);
+		$scope.departureMin = new Date(2017, 5, 5, 12, 0, 0);
+		
+		$scope.housings = housingService.housings();
+		$scope.ous = ouService.ous();
+		$scope.districts = districtService.districts();
+		
 		$scope.initPopovers();
+		
+		$scope.openBirthdayPopup = function() {
+			$scope.birthdaypopup.opened = true;
+		};
+		
+		$scope.openArrivalPopup = function() {
+			$scope.arrivalpopup.opened = true;
+		};
+		
+		$scope.openDeparturePopup = function() {
+			$scope.departurepopup.opened = true;
+		};
 		
 		$scope.dateOptionsBirthday = {
 			formatYear : 'yyyy',
 			startingDay : 1,
-			maxDate : maxDateInclusive,
-			initDate : maxDateInclusive
+			maxDate : new Date(),
+			initDate : new Date()
 		};
 		
 		$scope.dateOptionsArrival = {
 				formatYear : 'yyyy',
 				startingDay : 1,
-				maxDate : maxDateInclusive,
-				initDate : maxDateInclusive
+				minDate : new Date(2017, 4, 30, 0, 0, 0),
+				maxDate : new Date(2017, 5, 6, 23, 59, 59),
+				initDate : new Date(2017, 4, 31, 12, 0, 0)
+		};
+		
+		$scope.validateArrival = function() {
+			$scope.staff.arrivalconfirmed = ($scope.staff.arrival < $scope.arrivalMax);
 		};
 		
 		$scope.dateOptionsDeparture = {
 				formatYear : 'yyyy',
 				startingDay : 1,
-				maxDate : maxDateInclusive,
-				initDate : maxDateInclusive
+				minDate : new Date(2017, 4, 30, 0, 0, 0),
+				maxDate : new Date(2017, 5, 6, 23, 59, 59),
+				initDate : new Date(2017, 4, 31, 12, 0, 0)
 		};
 		
+		$scope.validateDeparture = function() {
+			$scope.staff.departureconfirmed = ($scope.staff.departure > $scope.departureMin);
+		};
 	}])
 	.controller('StaffConfirmController', ['$scope', function($scope) {
 		console.log('Staff confirm');
