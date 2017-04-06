@@ -32,10 +32,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import de.mischok.konkretlive.registration.model.Person;
 import de.mischok.konkretlive.registration.model.Registration;
+import de.mischok.konkretlive.registration.model.Staff;
 import de.mischok.konkretlive.registration.repository.GroupRepository;
 import de.mischok.konkretlive.registration.repository.LeaderRepository;
 import de.mischok.konkretlive.registration.repository.PersonRepository;
 import de.mischok.konkretlive.registration.repository.RegistrationRepository;
+import de.mischok.konkretlive.registration.repository.StaffRepository;
 import jxl.Workbook;
 import jxl.format.CellFormat;
 import jxl.write.DateFormat;
@@ -66,6 +68,9 @@ public class RegistrationService {
 	
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private StaffRepository staffRepository;
 	
 	@Autowired
 	private EmailService emailService;
@@ -423,5 +428,54 @@ public class RegistrationService {
 		Registration registration = this.registrationRepository.findOne(id);
 		
 		return ResponseEntity.ok(registration);
+	}
+	
+	@RequestMapping(value = "staff", method = RequestMethod.POST)
+	public ResponseEntity<?> saveStaffRegistration(@RequestBody @Valid Staff staff, BindingResult bindingResult) {
+		Assert.notNull(staff);
+		Assert.notNull(bindingResult);
+		
+		bindingResult = this.doValidation(staff, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+		} else {
+			Staff saved = this.staffRepository.save(staff);
+			
+			try {
+				this.sendEmail(saved);
+
+				URI location = UriComponentsBuilder.fromPath("/")
+						.pathSegment("registration/staff")
+						.pathSegment(saved.getId())
+						.build().toUri();
+				
+				return ResponseEntity.created(location).build();
+			} catch (MailException e) {
+				e.printStackTrace();
+				return ResponseEntity.status(520).body("Sending confirmation email failed");
+			}
+		}
+	}
+
+	private BindingResult doValidation(Staff staff, BindingResult bindingResult) {
+		return bindingResult;
+	}
+
+	private void sendEmail(Staff saved) {
+		// TODO Auto-generated method stub
+	}
+	
+	@RequestMapping(value = "staff/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getStaffRegistration(@PathVariable String id) {
+		Assert.hasText(id);
+		
+		Staff staff = this.staffRepository.findOne(id);
+		
+		if (staff != null) {
+			return ResponseEntity.ok(staff);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 }
