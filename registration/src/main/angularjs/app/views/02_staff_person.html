@@ -274,6 +274,12 @@
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
 		</div>
 	</div>
+			
+	<div class="form-group">
+		<div class="checkbox">
+			<label><input type="checkbox" ng-model="staff.known">{{ 'FORM_CHECKBOX_KNOWN' | translate }}</label>
+		</div>
+	</div>
 	
 	{{ staff | json }}
 	

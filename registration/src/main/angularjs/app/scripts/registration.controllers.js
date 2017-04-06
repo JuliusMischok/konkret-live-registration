@@ -307,7 +307,11 @@ var app = angular.module('registration')
 		};
 	}])
 	.controller('StaffRegistrationController', ['$scope', function($scope) {
-		$scope.person = {};
+		$scope.staff = {
+			arrivalconfirmed: false,
+			departureconfirmed: false
+		};
+		
 		$scope.registrationPerformed = false;
 		
 		$scope.setRegistrationPerformed = function(state) {
@@ -333,12 +337,10 @@ var app = angular.module('registration')
 		};
 		
 		$scope.personReady = function() {
-			return typeof $scope.personform !== typeof undefined && $scope.personform.$valid;
+			return typeof $scope.personform !== typeof undefined && $scope.personform.$valid && $scope.staff.arrivalconfirmed && $scope.staff.departureconfirmed;
 		};
 		
 		$scope.showPopover = function($event) {
-			console.log('show popover', $event);
-			
 			$event.stopPropagation();
 		};
 	}])
@@ -346,17 +348,11 @@ var app = angular.module('registration')
 		console.log('Staff start');
 		
 		$scope.proceed = function() {
-			$scope.setPersonform($scope.personform);
 			$scope.setActiveTab($scope.tabs.person);
 		};
 	}])
 	.controller('StaffPersonInputController', ['$scope', 'housingService', 'ouService', 'districtService', function($scope, housingService, ouService, districtService) {
 		console.log('Staff person');
-		
-		$scope.staff = {
-			arrivalconfirmed: false,
-			departureconfirmed: false
-		};
 		
 		$scope.birthdaypopup = {opened: false};
 		$scope.arrivalpopup = {opened: false};
@@ -413,9 +409,56 @@ var app = angular.module('registration')
 		$scope.validateDeparture = function() {
 			$scope.staff.departureconfirmed = ($scope.staff.departure > $scope.departureMin);
 		};
+		
+		$scope.proceed = function() {
+			$scope.setPersonform($scope.staffform);
+			$scope.setActiveTab($scope.tabs.confirm);
+		};
 	}])
-	.controller('StaffConfirmController', ['$scope', function($scope) {
+	.controller('StaffConfirmController', ['$scope', '$window', function($scope, $window) {
 		console.log('Staff confirm');
+		
+		$scope.privacyConfirmed = false;
+		$scope.hintPrivacyVisible = false;
+		$scope.registrationPending = false;
+		
+		$scope.toggleHintPrivacy = function($event) {
+			$event.stopPropagation();
+			$scope.hintPrivacyVisible = !$scope.hintPrivacyVisible;
+		};
+		
+		$scope.back = function() {
+			$scope.setActiveTab($scope.tabs.person);
+		};
+		
+		$scope.register = function() {
+			$window.alert('Coming soon...');
+			
+			// FIXME: Implementation
+		};
+		
+		$scope.showAdmissionHints = function() {
+			return !isNaN(parseFloat($scope.staff.admission)) && isFinite($scope.staff.admission) && $scope.staff.admission > 0;
+		};
+		
+		$scope.getAdmission = function() {
+			return $scope.staff.admission;
+		};
+		
+		$scope.getTransferUsageDonation = function() {
+			var address = $scope.staff.street +
+						((typeof $scope.staff.addressextra !== typeof undefined && $scope.staff.addressextra.length > 0) ? ' (' + $scope.staff.addressextra + ')' : '') + ', ' +
+						$scope.staff.zipcode + ' ' + $scope.staff.city; 
+			return $scope.staff.firstname + ' ' + $scope.staff.lastname + ', ' + address;
+		};
+		
+		$scope.getTransferUsageAdmission = function() {
+			return $scope.staff.firstname + ' ' + $scope.staff.lastname;
+		};
+		
+		$scope.registrationPossible = function() {
+			return $scope.privacyConfirmed;
+		};
 	}])
 	;
 				
