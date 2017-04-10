@@ -509,7 +509,7 @@ public class RegistrationService {
 		String name = (saved.getNickname() != null && !saved.getNickname().isEmpty()) ? saved.getNickname() : saved.getFirstname();
 		String result = "Hallo " + name + ",<br/><br/>vielen Dank für deine Anmeldung!<br/>Bitte lies die untenstehenden Hinweise aufmerksam und melde dich zeitnah bei Rückfragen.<br/><br/>Viele Grüße,<br/><br/>konkret live Office";
 		
-		if (saved.getAdmission() > 0 ) {
+		if (saved.getAdmission() != null && saved.getAdmission() > 0 ) {
 			DecimalFormat format = new DecimalFormat("#.00");
 			String admissionHint = "<h2>MITARBEITERBEITRAG</h2> "
 					+ "Bitte überweise den Betrag in Höhe von " + format.format(saved.getAdmission()) + " € auf eines der untenstehende Konten:<br/><br/>"
@@ -595,7 +595,7 @@ public class RegistrationService {
 		worksheet.addCell(new DateTime(15, 1, saved.getDeparture(), this.getNormalDateTimeCell()));
 		worksheet.addCell(new Label(16, 1, this.getHousing(saved.getHousing()), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(17, 1, this.getOu(saved.getOu()), this.getNormalCellFormat()));
-		worksheet.addCell(new jxl.write.Number(18, 1, saved.getAdmission(), this.getNormalCurrencyFormat()));
+		worksheet.addCell(new jxl.write.Number(18, 1, saved.getAdmission() != null ? saved.getAdmission() : 0d, this.getNormalCurrencyFormat()));
 		worksheet.addCell(new Label(19, 1, saved.getShirtsize(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(20, 1, saved.isKnown() ? "1" : "", this.getNormalCellFormat()));
 		worksheet.addCell(new DateTime(21, 1, new Date(), this.getNormalDateTimeCell()));
