@@ -50,7 +50,7 @@ var app = angular.module('registration')
 		};
 	})
 	.factory('priceService', function() {
-		var priceChange = new Date(2017, 3, 30, 0, 0, 0);
+		var priceChange = new Date(2017, 4, 1, 0, 0, 0);
 		var now = Date.now();
 		
 		var prices = (now < priceChange) ? [
