@@ -48,7 +48,7 @@
 	
 	<div class="form-group" ng-class="{'has-error': staffform.addressextra.$invalid && staffform.addressextra.$touched}">
 		<label class="control-label" for="addressextra" translate="FORM_LABEL_ADDRESSEXTRA"></label>
-		<input class="form-control" type="text" name="addressextra" ng-model="staff.addressextra" maxlength="30" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ADDRESSEXTRA' | translate }}" />
+		<input class="form-control" type="text" name="addressextra" ng-model="staff.addressextra" maxlength="50" placeholder="{{ 'FORM_PLACEHOLDER_LEADER_ADDRESSEXTRA' | translate }}" />
 		<div ng-messages="staffform.addressextra.$error" class="kl-message-validation" ng-show="staffform.addressextra.$touched">
 			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADDRESSEXTRA' | translate }}"></p>
 		</div>
@@ -268,10 +268,36 @@
 				<i class="fa fa-info-circle"></i>
 			</a>
 		</label>
-		<input class="form-control" type="text" name="admission" ng-model="staff.admission" maxlength="6" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ADMISSION' | translate }}" required />
+		<input class="form-control" type="number" ng-min="0" name="admission" ng-model="staff.admission" maxlength="6" placeholder="{{ 'FORM_PLACEHOLDER_STAFF_ADMISSION' | translate }}" required />
 		<div ng-messages="staffform.admission.$error" class="kl-message-validation" ng-show="staffform.admission.$touched">
 			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
-			<p ng-message="maxlength" translate="MESSAGE_VALIDATION_TOO_LONG" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
+			<p ng-message="number" translate="MESSAGE_VALIDATION_INVALID" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
+			<p ng-message="min" translate="MESSAGE_VALIDATION_INVALID" translate-value-field="{{ 'FORM_LABEL_ADMISSION' | translate }}"></p>
+		</div>
+	</div>
+	
+	<div class="form-group" ng-class="{'has-error': staffform.shirtsize.$invalid && staffform.shirtsize.$touched}">
+		<label class="control-label" for="shirtsize">
+			{{ 'FORM_LABEL_SHIRTSIZE' | translate }}
+			<a uib-popover="{{ 'HINT_STAFF_SHIRTSIZE' | translate }}" popover-trigger="'outsideClick'" popover-placement="auto right">
+				<i class="fa fa-info-circle"></i>
+			</a>
+		</label>
+		<select class="form-control" name="shirtsize" ng-model="staff.shirtsize" required>
+			<option class="kl-select-placeholder" value="" selected="selected" disabled="disabled" hidden="hidden" translate="FORM_PLACEHOLDER_STAFF_SHIRTSIZE" />
+			<option value="S (Damen)">S (Damen)</option>
+			<option value="S (Herren)">S (Herren)</option>
+			<option value="M (Damen)">M (Damen)</option>
+			<option value="M (Herren)">M (Herren)</option>
+			<option value="L (Damen)">L (Damen)</option>
+			<option value="L (Herren)">L (Herren)</option>
+			<option value="XL (Damen)">XL (Damen)</option>
+			<option value="XL (Herren)">XL (Herren)</option>
+			<option value="XXL (Damen)">XXL (Damen)</option>
+			<option value="XXL (Herren)">XXL (Herren)</option>
+		</select>
+		<div ng-messages="staffform.shirtsize.$error" class="kl-message-validation" ng-show="staffform.shirtsize.$touched">
+			<p ng-message="required" translate="MESSAGE_VALIDATION_REQUIRED" translate-value-field="{{ 'FORM_LABEL_SHIRTSIZE' | translate }}"></p>
 		</div>
 	</div>
 			

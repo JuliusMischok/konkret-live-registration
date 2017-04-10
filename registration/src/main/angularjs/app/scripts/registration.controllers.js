@@ -309,7 +309,8 @@ var app = angular.module('registration')
 	.controller('StaffRegistrationController', ['$scope', function($scope) {
 		$scope.staff = {
 			arrivalconfirmed: false,
-			departureconfirmed: false
+			departureconfirmed: false,
+			admission: 35.00
 		};
 		
 		$scope.registrationPerformed = false;
@@ -415,9 +416,7 @@ var app = angular.module('registration')
 			$scope.setActiveTab($scope.tabs.confirm);
 		};
 	}])
-	.controller('StaffConfirmController', ['$scope', '$window', function($scope, $window) {
-		console.log('Staff confirm');
-		
+	.controller('StaffConfirmController', ['$scope', '$translate', 'registrationService', function($scope, $translate, registrationService) {
 		$scope.privacyConfirmed = false;
 		$scope.hintPrivacyVisible = false;
 		$scope.registrationPending = false;
@@ -431,10 +430,34 @@ var app = angular.module('registration')
 			$scope.setActiveTab($scope.tabs.person);
 		};
 		
-		$scope.register = function() {
-			$window.alert('Coming soon...');
+		var registrationSuccessHandler = function(response) {
+			$scope.addAlert('success', $translate.instant('TITLE_REGISTRATION_SUCCESS'), $translate.instant('DETAIL_REGISTRATION_SUCCESS'));
 			
-			// FIXME: Implementation
+			$scope.registrationPending = false;
+			$scope.setRegistrationPerformed(true);
+		};
+		
+		var registrationFailureHandler = function(response) {
+			if (response.status === 520) {
+				$scope.addAlert('danger', $translate.instant('TITLE_MAIL_NOT_SENT'), $translate.instant('DETAIL_MAIL_NOT_SENT'));
+			} else if (response.status === 400) {
+				$scope.addAlert('danger', $translate.instant('TITLE_INVALID_DATA'), $translate.instant('DETAIL_INVALID_DATA'));
+			} else if (response.status === 404) {
+				$scope.addAlert('danger', $translate.instant('TITLE_BACKEND_UNAVAILABLE'), $translate.instant('DETAIL_BACKEND_UNAVAILABLE'));
+			} else {
+				$scope.addAlert('danger', $translate.instant('TITLE_UNKNOWN_ERROR'), $translate.instant('DETAIL_UNKNOWN_ERROR'));
+			}
+			
+			$scope.registrationPending = false;
+		};
+		
+		$scope.register = function() {
+			$scope.staff.price = $scope.staff.admission;
+			
+			$scope.registrationPending = true;
+			
+			registrationService.staffregistration().save($scope.staff)
+				.$promise.then(registrationSuccessHandler, registrationFailureHandler);
 		};
 		
 		$scope.showAdmissionHints = function() {

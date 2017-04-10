@@ -49,6 +49,7 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 /**
  * Service implementation 
@@ -463,9 +464,196 @@ public class RegistrationService {
 	}
 
 	private void sendEmail(Staff saved) {
-		// TODO Auto-generated method stub
+		Assert.notNull(saved);
+		
+		try {
+			String emailTextStaff = this.generateEmailTextStaff(saved);
+			InputStreamSource attachmentStream = this.exportStaffToExcel(saved);
+			
+			String emailTextOffice = "Liebes Office,<br/><br/>es gibt eine neue Mitarbeiteranmeldung für konkret live. Die Daten sind dieser E-Mail angehängt.<br/><br/>Viele Grüße!";
+			
+			this.emailService.sendEmail(saved.getEmail(), "Anmeldebestätigung konkret live", emailTextStaff, "anmeldedaten.xls", attachmentStream);
+			this.emailService.sendEmail(this.officeAddress, "Mitarbeiteranmeldung " + saved.getFirstname() + " " + saved.getLastname(), emailTextOffice, "anmeldedaten.xls", attachmentStream);
+			
+		} catch (WriteException | IOException e) {
+			throw new MailPreparationException("Error creating excel file", e);
+		}
 	}
 	
+	private String generateEmailTextStaff(Staff saved) {
+		Assert.notNull(saved);
+		
+		String address = saved.getStreet() + (saved.getAddressextra() != null && !saved.getAddressextra().isEmpty() ? "(" + saved.getAddressextra() + "), " : ", ") + saved.getZipcode() + " " + saved.getCity(); 
+			
+		String protectionHeadline = "<h2>INITIATIVE ZUM SCHUTZ VOR GEWALT UND MISSBRAUCH</h2>";
+		String protectionKnownStaff = "<p>"
+				+ "Aufgrund deiner Mitarbeit beim „BuJu 2015“ oder einer Kinder- und/oder Jugendfreizeit von „Aufwind“ seit dem Jahr 2015 musst du kein erweitertes Führungszeugnis vorlegen. Bitte beachte dennoch die übrigen, unten aufgeführten Schritte."
+				+ "</p>";
+		String protection = "<p>"
+				+ "Im Zusammenhang mit verantwortungsbewusster Aufgabenerfüllung haben wir uns als Gesamtleitung dafür entschieden, dass wir die Initiative zum Schutz vor Gewalt und Missbrauch des Bundes Freier evangelischer Gemeinden unterstützen und erwarten, dass sich alle Mitarbeitenden entsprechend dieser Maßstäbe verhalten. Wir möchten dich darauf hinweisen, dass wir dies zum Schutz unserer Mitarbeiterenden und Teilnehmenden und unseres Festivals tun und dass diese Entscheidung NICHT in einem Misstrauen gegenüber dir als einzelne/n Mitarbeiter/in begründet ist. Für Rückfragen wende dich bitte an Lisa Plaum (mail: lisa.plaum@konkretlive.de mobil: 0160 457 60 99)."
+				+ "Aufgrund dessen muss jede/r Mitarbeiter/in das Dokument"
+				+ "<ul>"
+				+ "<li>"
+				+ "<a href=\"https://anmeldung.konkretlive.de/uploads/Anlage1_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf\">Anlage1_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf</a> aufmerksam lesen und unterschreiben."
+				+ "</li>"
+				+ "<li>"
+				+ "Das Original des erweiterten Führungszeugnisses beantragen.<br/>"
+				+ "Dies ist nur persönlich bei der Ortspolizeibehörde (in der Regel ist diese im Ordnungsamt des Rathauses) deines Erstwohnsitzes erhältlich. Dort legst du die ausgedruckte und ausgefüllte <a href=\"https://anmeldung.konkretlive.de/uploads/Anlage2_BescheinigungZurBeantragungDesErweitertenFührungszeugnisses.pdf\">Anlage2_BescheinigungZurBeantragungDesErweitertenFührungszeugnisses.pdf</a> vor. Das Führungszeugnis darf zu Festivalbeginn nicht älter als 3 Monate sein. Für Ehrenamtliche ist das erweiterte Führungszeugnis gratis, Hauptamtliche zahlen ca. 15,- Euro."
+				+ "</li>"
+				+ "<li>"
+				+ "<a href=\"https://anmeldung.konkretlive.de/uploads/Anlage3_StraftatenKinder-UndJugendhilfegesetz.pdf\">Anlage3_StraftatenKinder-UndJugendhilfegesetz.pdf</a> aufmerksam lesen."
+				+ "</li>"
+				+ "Führungszeugnis und Verhaltenskodex zum Schutz vor Missbrauch und Gewalt müssen in Originalversion (nicht digital!) am Samstag, 20.05.2017 bei Lisa Plaum (Jahnstrasse 49-53, 35716 Dietzhölztal) vorliegen, sonst ist die Anmeldung als Mitarbeitender nicht gültig. Kannst du diesen Termin nicht einhalten, möchtest aber trotzdem teilnehmen, melde dich unbedingt persönlich bei Lisa Plaum (mail lisa.plaum@konkretlive.de mobil: 0160 457 60 99) um Weiteres zu besprechen."
+				+ "</p>";
+		
+		String name = (saved.getNickname() != null && !saved.getNickname().isEmpty()) ? saved.getNickname() : saved.getFirstname();
+		String result = "Hallo " + name + ",<br/><br/>vielen Dank für deine Anmeldung!<br/>Bitte lies die untenstehenden Hinweise aufmerksam und melde dich zeitnah bei Rückfragen.<br/><br/>Viele Grüße,<br/><br/>konkret live Office";
+		
+		if (saved.getAdmission() > 0 ) {
+			DecimalFormat format = new DecimalFormat("#.00");
+			String admissionHint = "<h2>MITARBEITERBEITRAG</h2> "
+					+ "Bitte überweise den Betrag in Höhe von " + format.format(saved.getAdmission()) + " € auf eines der untenstehende Konten:<br/><br/>"
+					+ "<table border=\"0\"><tr><td>"
+					+ "<h3>ALS SPENDE</h3>"
+					+ "Du erhältst eine Spendenquittung<br/><br/>"
+					+ "<strong>Empfänger:</strong> Nordbayerische Kreis der Freien evangelischen Gemeinden<br/>"
+					+ "<strong>IBAN:</strong> DE84 4526 0475 0008 3328 02<br/>"
+					+ "<strong>BIC:</strong> GENODEM1BFG<br/>"
+					+ "<strong>Bank:</strong> Spar- u Kreditbank des Bundes Freien evangelischen Gemeinden<br/>"
+					+ "<strong>Verwendungszweck:</strong> Spende, " + saved.getFirstname() + " " + saved.getLastname() + ", " + address + "<br/>"
+					+ "</td>"
+					+ "<td>"
+					+ "<h3>ALTERNATIV ALS BEITRAGSGEBÜHR</h3>"
+					+ "Du erhältst keine Spendenquittung<br/><br/>"
+					+ "<strong>IBAN:</strong> DE42 4526 0475 0015 3744 00<br/>"
+					+ "<strong>BIC:</strong> GENODEM1BFG<br/>"
+					+ "<strong>Bank:</strong> SKB Witten<br/>"
+					+ "<strong>Kontoinhaber:</strong> FeG Würzburg - Zeltlagerarbeit-<br/>"
+					+ "<strong>Verwendungszweck:</strong> Mitarbeiterbeitrag " + saved.getFirstname() + " " + saved.getLastname() + "<br/>"
+					+ "</td></tr></table>";
+		
+			result += admissionHint;
+		}
+		
+		result += protectionHeadline;
+		
+		if (saved.isKnown()) {
+			result += protectionKnownStaff;
+		}
+		
+		result += protection;
+		
+		return result;
+	}
+
+	private InputStreamSource exportStaffToExcel(Staff saved) throws RowsExceededException, WriteException, IOException {
+		Assert.notNull(saved);
+		
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		WritableWorkbook workbook = Workbook.createWorkbook(outStream);
+		
+		WritableSheet worksheet = workbook.createSheet("Mitarbeiterdaten", 0);
+		
+		worksheet.addCell(new Label(0, 0, "Vorname", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(1, 0, "Nachname", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(2, 0, "Straße Nr.", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(3, 0, "PLZ", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(4, 0, "Ort", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(5, 0, "Adresszusatz", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(6, 0, "Handy", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(7, 0, "E-Mail", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(8, 0, "Geburtsdatum", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(9, 0, "Vegetarier", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(10, 0, "LM-Allergien", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(11, 0, "Medizinische Hinweise", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(12, 0, "Bundeskreis", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(13, 0, "Spitzname", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(14, 0, "Anreise", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(15, 0, "Abreise", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(16, 0, "Unterbringung", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(17, 0, "Bereich", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(18, 0, "MA-Beitrag", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(19, 0, "T-Shirt", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(20, 0, "FZ liegt vor", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(21, 0, "Anmeldedatum", this.getBoldCellFormat()));
+		
+		worksheet.addCell(new Label(0, 1, saved.getFirstname(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(1, 1, saved.getLastname(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(2, 1, saved.getStreet(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(3, 1, saved.getZipcode(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(4, 1, saved.getCity(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(5, 1, saved.getAddressextra(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(6, 1, saved.getMobile(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(7, 1, saved.getEmail(), this.getNormalCellFormat()));
+		worksheet.addCell(new DateTime(8, 1, saved.getBirthday(), this.getNormalDateCell()));
+		worksheet.addCell(new Label(9, 1, saved.isVegetarian() ? "1" : "", this.getNormalCellFormat()));
+		worksheet.addCell(new Label(10, 1, saved.isVegetarian() ? "1" : "", this.getNormalCellFormat()));
+		worksheet.addCell(new Label(11, 1, saved.getMedicalhints(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(12, 1, this.getDistrict(saved.getDistrict()), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(13, 1, saved.getNickname(), this.getNormalCellFormat()));
+		worksheet.addCell(new DateTime(14, 1, saved.getArrival(), this.getNormalDateTimeCell()));
+		worksheet.addCell(new DateTime(15, 1, saved.getDeparture(), this.getNormalDateTimeCell()));
+		worksheet.addCell(new Label(16, 1, this.getHousing(saved.getHousing()), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(17, 1, this.getOu(saved.getOu()), this.getNormalCellFormat()));
+		worksheet.addCell(new jxl.write.Number(18, 1, saved.getAdmission(), this.getNormalCurrencyFormat()));
+		worksheet.addCell(new Label(19, 1, saved.getShirtsize(), this.getNormalCellFormat()));
+		worksheet.addCell(new Label(20, 1, saved.isKnown() ? "1" : "", this.getNormalCellFormat()));
+		worksheet.addCell(new DateTime(21, 1, new Date(), this.getNormalDateTimeCell()));
+		
+		workbook.write();
+		workbook.close();
+		
+		return new ByteArrayResource(outStream.toByteArray());
+	}
+
+	private String getHousing(String housing) {
+		Assert.hasText(housing);
+		
+		switch (housing) {
+		case "housing.self":
+			return "Selbst";
+		case "housing.tent":
+			return "Zelt";
+		case "housing.bed":
+			return "Bett";
+		case "housing.other":
+			return "Sonstiges";
+		default:
+			return housing;	
+		}
+	}
+
+	private String getOu(String ou) {
+		Assert.hasText(ou);
+		
+		switch (ou) {
+		case "ou.decentral":
+			return "Dezentrales Programm";
+		case "ou.general":
+			return "Gesamtleitung";
+		case "ou.hosting":
+			return "Hosting";
+		case "ou.logistics":
+			return "Logistik";
+		case "ou.staffservice":
+			return "Mitarbeiter-Service";
+		case "ou.pr":
+			return "Öffentlichkeitsarbeit";
+		case "ou.office":
+			return "Office";
+		case "ou.counseling":
+			return "Seelsorge";
+		case "ou.soundandlight":
+			return "Technik";
+		case "ou.central":
+			return "Zentrales Programm";
+		case "ou.other":
+			return "Sonstiges";
+		default:
+			return ou;
+		}
+	}
+
 	@RequestMapping(value = "staff/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getStaffRegistration(@PathVariable String id) {
 		Assert.hasText(id);

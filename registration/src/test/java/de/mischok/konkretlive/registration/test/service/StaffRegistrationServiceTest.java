@@ -34,7 +34,7 @@ public class StaffRegistrationServiceTest {
 		String json = "{ \"firstname\": \"Julius\", \"lastname\": \"Mischok\", \"street\": \"Jesuitengasse 23\", \"zipcode\": \"86152\", \"city\": \"Augsburg\","
 				+ " \"addressextra\": \"App. 22\", \"mobile\": \"sdfdsf\", \"email\": \"julius.mischok@mischok-it.de\", \"birthday\": \"2017-03-28T22:00:00.000Z\", "
 				+ " \"district\": \"district.nordbayern\", \"arrival\": \"2017-05-30T22:00:00.000Z\", \"departure\": \"2017-05-31T22:00:00.000Z\", \"housing\": \"housing.bed\","
-				+ " \"ou\": \"ou.logistics\", \"price\": \"58\", \"vegetarian\": true, \"foodallergy\": true, \"medicalhints\": \"Keine\", \"nickname\": \"Hottie\", \"known\": true }";
+				+ " \"ou\": \"ou.logistics\", \"price\": \"58\", \"vegetarian\": true, \"foodallergy\": true, \"medicalhints\": \"Keine\", \"nickname\": \"Hottie\", \"known\": true, \"shirtsize\": \"M (Herren)\" }";
 		
 		String location = RestAssured.given()
 			.contentType(ContentType.JSON)
@@ -79,6 +79,7 @@ public class StaffRegistrationServiceTest {
 			.body("medicalhints", Matchers.equalTo("Keine"))
 			.body("nickname", Matchers.equalTo("Hottie"))
 			.body("known", Matchers.equalTo(true))
+			.body("shirtsize", Matchers.equalTo("M (Herren)"))
 			;
 	}
 }

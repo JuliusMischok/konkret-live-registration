@@ -6,6 +6,9 @@ var app = angular.module('registration')
 				return $resource(
 						backendServiceUrl + 'registration');
 			};
+			this.staffregistration = function() {
+				return $resource(backendServiceUrl + 'registration/staff');
+			};
 	}])
 	.factory('grouptypeService', function() {
 		var grouptypes = [
@@ -47,12 +50,12 @@ var app = angular.module('registration')
 		};
 	})
 	.factory('priceService', function() {
-		var priceChange = new Date(2017, 3, 17, 0, 0, 0);
+		var priceChange = new Date(2017, 3, 30, 0, 0, 0);
 		var now = Date.now();
 		
 		var prices = (now < priceChange) ? [
 			{id: 'price.nichtverdiener', title: 'Nichtverdiener', price: 89.00},
-			{id: 'price.geringverdiener', title: 'Geringverdiener', price: 89.00},
+			{id: 'price.geringverdiener', title: 'Geringverdiener', price: 99.00},
 			{id: 'price.vollverdiener', title: 'Vollverdiener', price: 109.00}
 		] : [
 			{id: 'price.nichtverdiener.spaet', title: 'Nichtverdiener', price: 99.00},

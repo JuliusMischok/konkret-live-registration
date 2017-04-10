@@ -39,11 +39,14 @@ public class Staff extends Person {
 	@NotBlank
 	private String ou;
 
-	private String admission;
+	private Double admission;
 	
 	private String nickname;
 
 	private boolean known;
+	
+	@NotBlank
+	private String shirtsize;
 
 	public Staff() {}
 
@@ -85,14 +88,6 @@ public class Staff extends Person {
 
 	public void setOu(String ou) {
 		this.ou = ou;
-	}
-
-	public String getAdmission() {
-		return admission;
-	}
-
-	public void setAdmission(String admission) {
-		this.admission = admission;
 	}
 
 	public boolean isKnown() {
@@ -141,5 +136,21 @@ public class Staff extends Person {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getShirtsize() {
+		return shirtsize;
+	}
+
+	public void setShirtsize(String shirtsize) {
+		this.shirtsize = shirtsize;
+	}
+
+	public Double getAdmission() {
+		return admission;
+	}
+
+	public void setAdmission(Double admission) {
+		this.admission = admission;
 	}
 }
