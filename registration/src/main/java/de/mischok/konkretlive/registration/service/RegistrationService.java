@@ -43,7 +43,7 @@ import jxl.format.CellFormat;
 import jxl.write.DateFormat;
 import jxl.write.DateTime;
 import jxl.write.Label;
-import jxl.write.NumberFormats;
+import jxl.write.NumberFormat;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
@@ -190,7 +190,9 @@ public class RegistrationService {
 	}
 
 	private CellFormat getNormalCurrencyFormat() {
-		return new WritableCellFormat(NumberFormats.ACCOUNTING_FLOAT);
+		NumberFormat currencyFormat = new NumberFormat("###.###,00 " + NumberFormat.CURRENCY_EURO_SUFFIX, NumberFormat.COMPLEX_FORMAT); 
+
+		return new WritableCellFormat(currencyFormat);
 	}
 	
 	private String getGroupType(String type) {

@@ -360,7 +360,7 @@ var app = angular.module('registration')
 		$scope.departurepopup = {opened: false};
 		
 		$scope.arrivalMax = new Date(2017, 5, 1, 8, 0, 0);
-		$scope.departureMin = new Date(2017, 5, 5, 12, 0, 0);
+		$scope.departureMin = new Date(2017, 5, 5, 20, 0, 0);
 		
 		$scope.housings = housingService.housings();
 		$scope.ous = ouService.ous();
