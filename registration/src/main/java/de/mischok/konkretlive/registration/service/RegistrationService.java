@@ -493,28 +493,38 @@ public class RegistrationService {
 		String address = saved.getStreet() + (saved.getAddressextra() != null && !saved.getAddressextra().isEmpty() ? "(" + saved.getAddressextra() + "), " : ", ") + saved.getZipcode() + " " + saved.getCity(); 
 			
 		String protectionHeadline = "<h2>INITIATIVE ZUM SCHUTZ VOR GEWALT UND MISSBRAUCH</h2>";
-		String protectionKnownStaff = "<p>"
-				+ "Aufgrund deiner Mitarbeit beim „BuJu 2015“ oder einer Kinder- und/oder Jugendfreizeit von „Aufwind“ seit dem Jahr 2015 musst du kein erweitertes Führungszeugnis vorlegen. Bitte beachte dennoch die übrigen, unten aufgeführten Schritte."
-				+ "</p>";
-		String protection = "<p>"
-				+ "Im Zusammenhang mit verantwortungsbewusster Aufgabenerfüllung haben wir uns als Gesamtleitung dafür entschieden, dass wir die Initiative zum Schutz vor Gewalt und Missbrauch des Bundes Freier evangelischer Gemeinden unterstützen und erwarten, dass sich alle Mitarbeitenden entsprechend dieser Maßstäbe verhalten. Wir möchten dich darauf hinweisen, dass wir dies zum Schutz unserer Mitarbeiterenden und Teilnehmenden und unseres Festivals tun und dass diese Entscheidung NICHT in einem Misstrauen gegenüber dir als einzelne/n Mitarbeiter/in begründet ist. Für Rückfragen wende dich bitte an Lisa Plaum (mail: lisa.plaum@konkretlive.de mobil: 0160 457 60 99)."
-				+ "Aufgrund dessen muss jede/r Mitarbeiter/in das Dokument"
-				+ "<ul>"
-				+ "<li>"
-				+ "<a href=\"https://anmeldung.konkretlive.de/uploads/Anlage1_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf\">Anlage1_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf</a> aufmerksam lesen und unterschreiben."
-				+ "</li>"
-				+ "<li>"
-				+ "Das Original des erweiterten Führungszeugnisses beantragen.<br/>"
-				+ "Dies ist nur persönlich bei der Ortspolizeibehörde (in der Regel ist diese im Ordnungsamt des Rathauses) deines Erstwohnsitzes erhältlich. Dort legst du die ausgedruckte und ausgefüllte <a href=\"https://anmeldung.konkretlive.de/uploads/Anlage2_BescheinigungZurBeantragungDesErweitertenFührungszeugnisses.pdf\">Anlage2_BescheinigungZurBeantragungDesErweitertenFührungszeugnisses.pdf</a> vor. Das Führungszeugnis darf zu Festivalbeginn nicht älter als 3 Monate sein. Für Ehrenamtliche ist das erweiterte Führungszeugnis gratis, Hauptamtliche zahlen ca. 15,- Euro."
-				+ "</li>"
-				+ "<li>"
-				+ "<a href=\"https://anmeldung.konkretlive.de/uploads/Anlage3_StraftatenKinder-UndJugendhilfegesetz.pdf\">Anlage3_StraftatenKinder-UndJugendhilfegesetz.pdf</a> aufmerksam lesen."
-				+ "</li>"
-				+ "Führungszeugnis und Verhaltenskodex zum Schutz vor Missbrauch und Gewalt müssen in Originalversion (nicht digital!) am Samstag, 20.05.2017 bei Lisa Plaum (Jahnstrasse 49-53, 35716 Dietzhölztal) vorliegen, sonst ist die Anmeldung als Mitarbeitender nicht gültig. Kannst du diesen Termin nicht einhalten, möchtest aber trotzdem teilnehmen, melde dich unbedingt persönlich bei Lisa Plaum (mail lisa.plaum@konkretlive.de mobil: 0160 457 60 99) um Weiteres zu besprechen."
-				+ "</p>";
+		
+		String protection = "<p>Weil wir die Initiative zum Schutz vor Missbrauch und Gewalt des Bundes Freier evangelischer Gemeinden unterstützen, bitten wir dich den Verhaltenskodex zum Schutz vor Missbrauch und Gewalt zu unterschreiben und ein erweitertes polizeiliches Führungszeugnis vorzulegen.</p>"
+				+ "<p><strong>Wir möchten dich darauf hinweisen, dass wir dies zum Schutz unserer Mitarbeiterenden und Teilnehmenden und unseres Festivals tun und dass diese Entscheidung NICHT in einem Misstrauen gegenüber dir als einzelne/n Mitarbeiter/in begründet ist.</strong></p>"
+				+ "<p>Für Rückfragen wende dich bitte an Lisa Plaum (mail: <a href=\"mailto:lisa.plaum@konkretlive.de\">lisa.plaum@konkretlive.de</a> mobil: 0160 457 60 99).</p>"
+				+ "<p>Bitte führe die folgenden Schritte aus:</p>"
+				+ "<p>"
+				+ "	<ol>"
+				+ "		<li>Du erhältst nach deiner Onlineanmeldung automatisch von uns per Post das Dokument <strong>\"Bescheinigung zur Beantragung des erweiterten Führungszeugnisses.pdf\"</strong>. Du beantragst damit ein erweitertes polizeiliches Führungszeugnis."
+				+ "			<ol type=\"a\">"
+				+ "				<li>Du füllst die <strong>\"Bescheinigung zur Beantragung des erweiterten Führungszeugnisses.pdf\"</strong> aus, unterschreibst sie und gehst persönlich zum Bürgerbüro deines Erstwohnsitzes. Dort legst du die Bescheinigung zur Beantragung des erweiterten Führungszeugnisses vor, damit du das Führungszeugnis gratis erhältst. Das Führungszeugnis darf zu Festivalbeginn nicht älter als 3 Monate sein.</li>"
+				+ "				<li>Hast du das Führungszeugnis erhalten, schickst du es Lisa Plaum per Post. Da wir aus datenschutzrechtlichen Gründen dein Führungszeugnis nicht behalten dürfen, bekommst du dein Führungszeugnis zu Beginn des Festivals wieder zurück.</li>"
+				+ "			</ol>"
+				+ "		</li>"
+				+ "		<li>Du füllst das Formular <a href=\"https://anmeldung.konkretlive.de/uploads/Anlage2_DokumentationDerEinsichtnahmeInErweitertesFuehrungszeugnis.pdf\" target=\"_blank\">\"Anlage 2: Dokumentation der Einsichtnahme in erweitertes Führungszeugnis\"</a> aus und unterschreibst an der für dich vorgesehenen Stelle.</li>"
+				+ "		<li>Du liest dir <a href=\"https://anmeldung.konkretlive.de/uploads/Anlage3_StraftatenKinderUndJugendhilfegesetz.pdf\" target=\"_blank\">\"Anlage 3 Straftaten Kinder- und Jugendhilfegesetz\"</a> aufmerksam durch.</li>"
+				+ "		<li>Du liest dir <a href=\"https://anmeldung.konkretlive.de/uploads/Anlage4_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf\" target=\"_blank\">\"Anlage 4 Verhaltenskodex zum Schutz vor Missbrauch und Gewalt\"</a> aufmerksam durch und sendest sie unterschrieben per Post an Lisa Plaum.</li>"
+				+ "	</ol>"
+				+ "</p>"
+				+ "<p><strong>Alle Dokumente müssen in Originalversion (nicht digital!) am Samstag, 20.05.2017 bei Lisa Plaum vorliegen</strong>, sonst ist deine Anmeldung als Mitarbeiter/in nicht gültig. Kannst du diesen Termin nicht einhalten, möchtest aber trotzdem teilnehmen, melde dich unbedingt persönlich bei Lisa Plaum, um Weiteres zu besprechen.</p>"
+				+ "<table border=\"0\">"
+				+ "	<tr>"
+				+ "		<td><h3>Mein Brief enthält:</h3></td>"
+				+ "		<td><h3>Ich sende ihn an:</h3></td>"
+				+ "	</tr>"
+				+ "	<tr>"
+				+ "		<td style=\"vertical-align: top;\">Erweitertes Führungszeugnis</li><li><a href=\"https://anmeldung.konkretlive.de/uploads/Anlage2_DokumentationDerEinsichtnahmeInErweitertesFuehrungszeugnis.pdf\" target=\"_blank\">\"Anlage 2: Dokumentation der Einsichtnahme in erweitertes Führungszeugnis\"</a></li><li><a href=\"https://anmeldung.konkretlive.de/uploads/Anlage4_VerhaltenskodexZumSchutzVorMissbrauchUndGewalt.pdf\" target=\"_blank\">\"Anlage 4 Verhaltenskodex zum Schutz vor Missbrauch und Gewalt\"</a></li></ul>"
+				+ "		<td style=\"vertical-align: top;\">Lisa Plaum</br>Jahnstrasse 49-53</br>35716 Dietzhölztal</br>mail: <a href=\"mailto:lisa.plaum@konkretlive.de\">lisa.plaum@konkretlive.de</a></br>mobil: 0160 457 60 99</td>"
+				+ "	</tr>"
+				+ "</table>";
 		
 		String name = (saved.getNickname() != null && !saved.getNickname().isEmpty()) ? saved.getNickname() : saved.getFirstname();
-		String result = "Hallo " + name + ",<br/><br/>vielen Dank für deine Anmeldung!<br/>Bitte lies die untenstehenden Hinweise aufmerksam und melde dich zeitnah bei Rückfragen.<br/><br/>Viele Grüße,<br/><br/>konkret live Office";
+		String result = "Hallo " + name + ",<br/><br/>vielen Dank für deine Anmeldung!<br/>Bitte lies die untenstehenden Hinweise aufmerksam und melde dich zeitnah bei Rückfragen.<br/>Alle Informationen für Mitarbeiter findest du nochmal im Dokument <a href=\"https://anmeldung.konkretlive.de/uploads/InformationsschreibenAnMitarbeiter.pdf\" target=\"_blank\">Informationsschreiben an Mitarbeiter</a><br/><br/>Viele Grüße,<br/><br/>konkret live Office";
 		
 		if (saved.getAdmission() != null && saved.getAdmission() > 0 ) {
 			DecimalFormat format = new DecimalFormat("#.00");
@@ -543,11 +553,6 @@ public class RegistrationService {
 		}
 		
 		result += protectionHeadline;
-		
-		if (saved.isKnown()) {
-			result += protectionKnownStaff;
-		}
-		
 		result += protection;
 		
 		return result;
@@ -581,8 +586,7 @@ public class RegistrationService {
 		worksheet.addCell(new Label(17, 0, "Bereich", this.getBoldCellFormat()));
 		worksheet.addCell(new Label(18, 0, "MA-Beitrag", this.getBoldCellFormat()));
 		worksheet.addCell(new Label(19, 0, "T-Shirt", this.getBoldCellFormat()));
-		worksheet.addCell(new Label(20, 0, "FZ liegt vor", this.getBoldCellFormat()));
-		worksheet.addCell(new Label(21, 0, "Anmeldedatum", this.getBoldCellFormat()));
+		worksheet.addCell(new Label(20, 0, "Anmeldedatum", this.getBoldCellFormat()));
 		
 		worksheet.addCell(new Label(0, 1, saved.getFirstname(), this.getNormalCellFormat()));
 		worksheet.addCell(new Label(1, 1, saved.getLastname(), this.getNormalCellFormat()));
@@ -604,8 +608,7 @@ public class RegistrationService {
 		worksheet.addCell(new Label(17, 1, this.getOu(saved.getOu()), this.getNormalCellFormat()));
 		worksheet.addCell(new jxl.write.Number(18, 1, saved.getAdmission() != null ? saved.getAdmission() : 0d, this.getNormalCurrencyFormat()));
 		worksheet.addCell(new Label(19, 1, saved.getShirtsize(), this.getNormalCellFormat()));
-		worksheet.addCell(new Label(20, 1, saved.isKnown() ? "1" : "", this.getNormalCellFormat()));
-		worksheet.addCell(new DateTime(21, 1, new Date(), this.getNormalDateTimeCell()));
+		worksheet.addCell(new DateTime(20, 1, new Date(), this.getNormalDateTimeCell()));
 		
 		workbook.write();
 		workbook.close();

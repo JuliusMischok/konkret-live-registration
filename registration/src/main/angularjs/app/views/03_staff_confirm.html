@@ -1,5 +1,12 @@
 <div ng-controller="StaffConfirmController">
 	
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 translate="HEADLINE_STAFF_CONFIRM"></h1>
+			<p translate="HINT_STAFF_CONFIRM_PAGE"></p>
+		</div>
+	</div>
+	
 	<div class="row" ng-show="showAdmissionHints()">
 		<div class="col-xs-12">
 			<h1 translate="HEADLINE_STAFF_ADMISSION"></h1>
@@ -16,7 +23,6 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h1 translate="HEADLINE_PROTECTION_OF_ABUSE"></h1>
-			<div ng-show="staff.known" class="alert alert-success" translate="HINT_STAFF_KNOWN"></div>
 			<p translate="HINT_PROTECTION_OF_ABUSE"></p>
 		</div>
 	</div>

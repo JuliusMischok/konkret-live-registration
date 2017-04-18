@@ -42,8 +42,6 @@ public class Staff extends Person {
 	private Double admission;
 	
 	private String nickname;
-
-	private boolean known;
 	
 	@NotBlank
 	private String shirtsize;
@@ -88,14 +86,6 @@ public class Staff extends Person {
 
 	public void setOu(String ou) {
 		this.ou = ou;
-	}
-
-	public boolean isKnown() {
-		return known;
-	}
-
-	public void setKnown(boolean known) {
-		this.known = known;
 	}
 
 	public String getStreet() {
