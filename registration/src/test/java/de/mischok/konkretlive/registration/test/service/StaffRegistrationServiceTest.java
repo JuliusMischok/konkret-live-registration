@@ -78,7 +78,6 @@ public class StaffRegistrationServiceTest {
 			.body("foodallergy", Matchers.equalTo(true))
 			.body("medicalhints", Matchers.equalTo("Keine"))
 			.body("nickname", Matchers.equalTo("Hottie"))
-			.body("known", Matchers.equalTo(true))
 			.body("shirtsize", Matchers.equalTo("M (Herren)"))
 			;
 	}
