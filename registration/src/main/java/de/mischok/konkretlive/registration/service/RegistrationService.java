@@ -385,7 +385,7 @@ public class RegistrationService {
 		Assert.notNull(bindingResult);
 		
 		bindingResult = this.checkPersonFullAge(registration.getLeader(), bindingResult);
-		bindingResult = this.checkPersonsMobileRequired(registration.getParticipants(), bindingResult);
+		bindingResult = this.checkPersonsMobileRequired(registration.getLeader(), registration.getParticipants(), bindingResult);
 		
 		return bindingResult;
 	}
@@ -409,9 +409,14 @@ public class RegistrationService {
 		return bindingResult;
 	}
 
-	private BindingResult checkPersonsMobileRequired(List<Person> participants, final BindingResult bindingResult) {
+	private BindingResult checkPersonsMobileRequired(Person leader, List<Person> participants, final BindingResult bindingResult) {
+		Assert.notNull(leader);
 		Assert.notNull(participants);
 		Assert.notNull(bindingResult);
+		
+		if (leader.getMobile() == null || leader.getMobile().isEmpty()) {
+			bindingResult.rejectValue("mobile", "required", "Mobile required");
+		}
 		
 		for (int index=0; index<participants.size(); index++) {
 			Person participant = participants.get(index);

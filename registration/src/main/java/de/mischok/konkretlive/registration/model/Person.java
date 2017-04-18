@@ -37,7 +37,6 @@ public class Person {
 	
 	private boolean foodallergy;
 
-	@NotBlank
 	private String mobile;
 
 	private String medicalhints;
