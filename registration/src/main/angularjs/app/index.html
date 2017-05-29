@@ -51,7 +51,18 @@
 		</section>
 		
 		<section class="content" ng-controller="PageController">
-			<div ui-view></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+						<h1>Bald geht es los...</h1>
+						<p>
+							... daher ist an dieser Stelle keine Anmeldung mehr möglich. Bitte wende dich direkt an das Office unter der E-Mail Adresse
+							<a href="mailto:office@konkretlive.de">office@konkretlive.de</a>.
+						</p>
+					</div>
+				</div>
+				
+			</div>
 			
 			<div id="message-container" class="ng-cloak" ng-show="alerts.length > 0">
 				<div uib-alert ng-cloak ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}">
